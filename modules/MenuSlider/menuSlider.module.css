@@ -3,14 +3,27 @@
   color: #f2f2f2;
   bottom: 0;
   left: 0;
-  padding-top: calc(env(safe-area-inset-top) + 32px) 16px 16px
+  padding: calc(env(safe-area-inset-top) + 56px) 16px 16px
     calc(env(safe-area-inset-left) + 16px);
   position: fixed;
+  display: block;
   top: 0;
   transform: translateX(-110%);
   transition: all 250ms ease-in-out;
-  width: 300px;
+  width: var(--sidebar-width);
   z-index: 30;
+
+  overflow-y: auto;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+}
+
+.sliding-menu-wrapper * {
+  -ms-overflow-style: none;
+}
+
+.sliding-menu-wrapper::-webkit-scrollbar {
+  display: none;
 }
 
 .show-sliding-menu {

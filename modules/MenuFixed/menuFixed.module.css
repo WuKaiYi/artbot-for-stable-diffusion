@@ -1,0 +1,31 @@
+.fixed-menu-wrapper {
+  /* padding: 32px 16px 16px calc(env(safe-area-inset-left) + 16px); */
+  background-color: var(--dark-shade);
+  bottom: 0;
+  color: #f2f2f2;
+  display: none;
+  left: 0;
+  padding: 8px;
+  position: fixed;
+  top: 52px;
+  width: var(--sidebar-width);
+  z-index: 30;
+
+  overflow-y: auto;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+}
+
+.fixed-menu-wrapper * {
+  -ms-overflow-style: none;
+}
+
+.fixed-menu-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 1440px) {
+  .fixed-menu-wrapper {
+    display: block;
+  }
+}

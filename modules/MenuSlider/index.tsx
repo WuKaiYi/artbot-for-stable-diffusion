@@ -7,8 +7,10 @@ import { useEffect } from 'react'
 import Menu from 'components/Menu'
 import Overlay from 'components/UI/Overlay'
 import styles from './menuSlider.module.css'
+import { useWindowSize } from 'hooks/useWindowSize'
 
 const MenuSlider = () => {
+  const size = useWindowSize()
   const appState = useStore(appInfoStore)
   const { showAppMenu } = appState
 
@@ -25,6 +27,16 @@ const MenuSlider = () => {
       document.removeEventListener('keydown', handleKeyDown)
     }
   }, [])
+
+  useEffect(() => {
+    if (showAppMenu && size.width && size.width >= 1440) {
+      setShowAppMenu(false)
+    }
+  }, [size, showAppMenu])
+
+  if (size?.width && size.width >= 1440) {
+    return null
+  }
 
   return (
     <>

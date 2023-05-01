@@ -25,7 +25,6 @@ import { initBrowserTab, isAppActive } from '../utils/appUtils'
 import ToastContainer from 'components/ToastContainer'
 import AdContainer from '../components/AdContainer'
 import { useRouter } from 'next/router'
-import Menu from '../components/Menu'
 import Linker from '../components/UI/Linker'
 import ServerMessage from '../components/ServerMessage'
 import { initPendingJobService } from 'controllers/pendingJobsController'
@@ -34,6 +33,7 @@ import ServerUpdateComponent from 'components/ServerUpdateComponent'
 import { useWindowSize } from 'hooks/useWindowSize'
 import HeaderNav from 'modules/HeaderNav'
 import MenuSlider from 'modules/MenuSlider'
+import MenuFixed from 'modules/MenuFixed'
 
 initBrowserTab()
 initAppSettings()
@@ -60,7 +60,6 @@ function MyApp({ Component, darkMode, pageProps }: MyAppProps) {
     buildId,
     imageDetailsModalOpen,
     stableHordeApiOnline,
-    showAppMenu,
     unsupportedBrowser
   } = appState
 
@@ -200,7 +199,7 @@ function MyApp({ Component, darkMode, pageProps }: MyAppProps) {
       <HeaderNav />
       <ContentWrapper>
         <MenuSlider />
-        {/* <Header /> */}
+        <MenuFixed />
         <div className="main-content absolute mx-auto w-full md:pb-[0] md:relative px-[8px]">
           <ToastContainer
             style={{ marginTop: `calc(env(safe-area-inset-top))` }}
