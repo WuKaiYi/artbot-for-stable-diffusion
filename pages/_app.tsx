@@ -33,6 +33,7 @@ import { initPendingJobService } from 'controllers/pendingJobsController'
 import ErrorComponent, { logErrorInComponent } from 'components/ErrorComponent'
 import ServerUpdateComponent from 'components/ServerUpdateComponent'
 import { useWindowSize } from 'hooks/useWindowSize'
+import HeaderNav from 'modules/HeaderNav'
 
 initBrowserTab()
 initAppSettings()
@@ -196,9 +197,10 @@ function MyApp({ Component, darkMode, pageProps }: MyAppProps) {
         <link rel="icon" type="image/x-icon" href="/artbot/favicon.ico"></link>
       </Head>
       <PollController />
+      <HeaderNav />
       <ContentWrapper>
         <Menu show={showAppMenu} />
-        <Header />
+        {/* <Header /> */}
         <div className="absolute mx-auto w-full md:pb-[0] top-[48px] md:top-[44px] md:relative px-[8px]">
           <ToastContainer
             style={{ marginTop: `calc(env(safe-area-inset-top))` }}

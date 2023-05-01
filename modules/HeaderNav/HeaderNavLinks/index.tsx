@@ -1,23 +1,24 @@
-/* eslint-disable react/display-name */
-import React from 'react'
 import clsx from 'clsx'
 import * as NavigationMenu from '@radix-ui/react-navigation-menu'
-import styles from './navBar.module.css'
-import ChevronDownIcon from '../../icons/ChevronDownIcon'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import AnalyticsIcon from '../../icons/AnalyticsIcon'
-import HordeDropdown from './HordeDropdown'
-import PointIcon from '../../icons/PointIcon'
 import { useStore } from 'statery'
 import { userInfoStore } from '../../../store/userStore'
-import AlertTriangleIcon from 'components/icons/AlertTriangle'
-import ErrorDropdown from './ErrorDropdown'
+import styles from './headerNavLinks.module.css'
+
 import {
   appInfoStore,
   setNewImageReady,
   setShowImageReadyToast
 } from 'store/appStore'
+import {
+  IconAlertTriangle,
+  IconChevronDown,
+  IconDeviceDesktopAnalytics,
+  IconPoint
+} from '@tabler/icons-react'
+import HordePerformanceDropdown from '../HordePerformanceDropdown'
+import HeaderNavErrorDropdown from '../HeaderNavErrorDropdown'
 
 const ListItem = ({ className, children, href, title, ...props }: any) => (
   <li>
@@ -34,7 +35,7 @@ const ListItem = ({ className, children, href, title, ...props }: any) => (
   </li>
 )
 
-const NavBar = () => {
+const HeaderNavLinks = () => {
   const router = useRouter()
   const { pathname } = router
 
@@ -96,7 +97,7 @@ const NavBar = () => {
             <Link className={styles.NavigationMenuLink} href="/">
               Create
             </Link>
-            <ChevronDownIcon className={styles.CaretDown} />
+            <IconChevronDown className={styles.CaretDown} />
           </NavigationMenu.Trigger>
           <NavigationMenu.Content className={styles.NavigationMenuContent}>
             <ul className={clsx(styles.List, styles.one)}>
@@ -175,7 +176,7 @@ const NavBar = () => {
             >
               Info
             </Link>
-            <ChevronDownIcon className={styles.CaretDown} />
+            <IconChevronDown className={styles.CaretDown} />
           </NavigationMenu.Trigger>
           <NavigationMenu.Content className={styles.NavigationMenuContent}>
             <ul className={clsx(styles.List, styles.one)}>
@@ -211,7 +212,7 @@ const NavBar = () => {
             <Link className={styles.NavigationMenuLink} href="/settings">
               Settings
             </Link>
-            <ChevronDownIcon className={styles.CaretDown} />
+            <IconChevronDown className={styles.CaretDown} />
           </NavigationMenu.Trigger>
           <NavigationMenu.Content className={styles.NavigationMenuContent}>
             <ul className={clsx(styles.List, styles.one)}>
@@ -241,10 +242,10 @@ const NavBar = () => {
                 styles.AnalyticsIcon
               )}
             >
-              <AlertTriangleIcon size={32} stroke="red" />
+              <IconAlertTriangle size={32} color="red" stroke={1.5} />
             </NavigationMenu.Trigger>
             <NavigationMenu.Content className={styles.NavigationMenuContent}>
-              <ErrorDropdown />
+              <HeaderNavErrorDropdown />
             </NavigationMenu.Content>
           </NavigationMenu.Item>
         )}
@@ -254,16 +255,16 @@ const NavBar = () => {
             className={clsx(styles.NavigationMenuTrigger, styles.AnalyticsIcon)}
           >
             {(isActive || isPaused) && (
-              <PointIcon
+              <IconPoint
                 className={styles.WorkerStatus}
                 fill={workerBadgeColor}
                 stroke="white"
               />
             )}
-            <AnalyticsIcon size={32} />
+            <IconDeviceDesktopAnalytics size={32} stroke={1.5} />
           </NavigationMenu.Trigger>
           <NavigationMenu.Content className={styles.NavigationMenuContent}>
-            <HordeDropdown />
+            <HordePerformanceDropdown />
           </NavigationMenu.Content>
         </NavigationMenu.Item>
 
@@ -279,4 +280,4 @@ const NavBar = () => {
   )
 }
 
-export default NavBar
+export default HeaderNavLinks

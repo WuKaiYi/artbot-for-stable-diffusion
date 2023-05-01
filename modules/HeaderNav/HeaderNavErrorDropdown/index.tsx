@@ -1,8 +1,11 @@
 import Linker from 'components/UI/Linker'
 
-const ErrorDropdown = () => {
+const HeaderNavErrorDropdown = () => {
   return (
-    <div className="p-[12px] w-full tablet:w-[400px] text-[14px]">
+    <div
+      className="p-[12px] w-full tablet:w-[400px] text-[14px]"
+      style={{ color: '#f2f2f2' }}
+    >
       <div className="font-[700] mb-[8px]">Web App Storage Quota Error</div>
       <div className="font-mono text-[12px] pl-[8px]">
         ArtBot is currently <strong>unable</strong> to write additional data to
@@ -23,4 +26,4 @@ const ErrorDropdown = () => {
   )
 }
 
-export default ErrorDropdown
+export default HeaderNavErrorDropdown

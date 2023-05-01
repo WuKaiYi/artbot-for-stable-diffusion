@@ -1,19 +1,18 @@
 import clsx from 'clsx'
 import { useState } from 'react'
 import { useStore } from 'statery'
-import fetchMyWorkers from '../../../../api/fetchMyWorkers'
-import AppSettings from '../../../../models/AppSettings'
-import { appInfoStore } from '../../../../store/appStore'
-import { userInfoStore } from '../../../../store/userStore'
-import { clientHeader, getApiHostServer } from '../../../../utils/appUtils'
-import { sleep } from '../../../../utils/sleep'
-import PauseIcon from '../../../icons/PauseIcon'
-import PlayIcon from '../../../icons/PlayIcon'
-import PointIcon from '../../../icons/PointIcon'
-import SpinnerV2 from '../../../Spinner'
-import styles from './hordeDropdown.module.css'
 
-const HordeDropdown = () => {
+import { appInfoStore } from 'store/appStore'
+import { userInfoStore } from 'store/userStore'
+import { clientHeader, getApiHostServer } from 'utils/appUtils'
+import AppSettings from 'models/AppSettings'
+import { sleep } from 'utils/sleep'
+import fetchMyWorkers from 'api/fetchMyWorkers'
+import SpinnerV2 from 'components/Spinner'
+import { IconPlayerPause, IconPlayerPlay, IconPoint } from '@tabler/icons-react'
+import styles from './horderPerformanceDropdown.module.css'
+
+const HordePerformanceDropdown = () => {
   const appStore = useStore(appInfoStore)
   const userStore = useStore(userInfoStore)
   const { worker_ids, workers } = userStore
@@ -103,7 +102,12 @@ const HordeDropdown = () => {
   }
 
   return (
-    <div className="p-[12px] w-full tablet:w-[400px] text-[14px]">
+    <div
+      className={clsx(
+        styles['horde-perf-dropdown'],
+        'p-[12px] w-full text-[14px]'
+      )}
+    >
       <div className="font-[700] mb-[8px]">Stable Horde Performance</div>
       <div className="font-mono text-[12px] pl-[8px]">
         <div>
@@ -210,13 +214,23 @@ const HordeDropdown = () => {
                       {workerState[key] === 'loading' && (
                         <SpinnerV2 size={24} />
                       )}
-                      {workerState[key] === 'active' && <PauseIcon />}
-                      {workerState[key] === 'paused' && <PlayIcon />}
-                      {workerState[key] === 'offline' && <PlayIcon />}
+                      {workerState[key] === 'active' && (
+                        <IconPlayerPause stroke={1.5} />
+                      )}
+                      {workerState[key] === 'paused' && (
+                        <IconPlayerPlay stroke={1.5} />
+                      )}
+                      {workerState[key] === 'offline' && (
+                        <IconPlayerPlay stroke={1.5} />
+                      )}
                     </div>
                     <div className="flex flex-row gap-[0px] items-center">
                       {worker.name}
-                      <PointIcon stroke="white" fill={workerBadgeColor} />
+                      <IconPoint
+                        color="white"
+                        fill={workerBadgeColor}
+                        stroke={1.5}
+                      />
                     </div>
                   </div>
                   <div className="flex flex-col tablet:flex-row tablet:items-center font-mono tablet:justify-between w-full pl-[4px]">
@@ -236,4 +250,4 @@ const HordeDropdown = () => {
   )
 }
 
-export default HordeDropdown
+export default HordePerformanceDropdown

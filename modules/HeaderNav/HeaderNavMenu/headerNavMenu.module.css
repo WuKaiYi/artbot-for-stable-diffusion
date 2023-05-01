@@ -1,0 +1,9 @@
+.header-nav-logo-img {
+  color: #f2f2f2;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.header-nav-logo-img:hover {
+  color: var(--main-color);
+}
