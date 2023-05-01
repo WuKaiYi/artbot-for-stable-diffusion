@@ -1,5 +1,42 @@
 :root {
   --body-color: #f2f2f2;
+  --text-color: #244975;
+
+  --light-shade: #efedef;
+  --light-accent: #9ca8bd;
+  --main-color: #14b8a6;
+  --accent-color: #8e6f7e;
+  --dark-accent: #8e7fb8;
+  --dark-shade: #244975;
+
+  --sticky-footer-margin: -50px;
+
+  --btn-primary: #6ab7c6;
+  --btn-primary-hover: #8fc9d4;
+  --btn-secondary: #c77b68;
+  --btn-secondary-hover: #d59c8e;
+
+  --placeholder-text: #9299a6;
+  --input-background: #ffffff;
+  --input-text: #282828;
+
+  /** Controls opacity for react-tooltip */
+  --rt-opacity: 0.95;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* --body-color: rgb(30, 50, 80); */
+    --body-color: #222222;
+    --text-color: #efedef;
+
+    --input-background: rgb(42, 48, 60);
+    --input-text: #e1e1e1;
+  }
+}
+
+/* :root {
+  --body-color: #f2f2f2;
   --text-color: #344c50;
   --light-text-color: #ffffff;
   --card-bg-color: #7e5a6c;
@@ -42,4 +79,4 @@
     --btn-secondary-color: #c77b68;
     --btn-secondary-active: #d59c8e;
   }
-}
+} */
