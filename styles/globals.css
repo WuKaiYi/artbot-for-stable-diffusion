@@ -19,8 +19,8 @@ html {
 
 body {
   min-height: calc(100% + env(safe-area-inset-top));
-  padding: env(safe-area-inset-top) env(safe-area-inset-right)
-    env(safe-area-inset-bottom) env(safe-area-inset-left);
+  padding: 0 env(safe-area-inset-right) env(safe-area-inset-bottom)
+    env(safe-area-inset-left);
   width: 100%;
 }
 
@@ -60,6 +60,10 @@ a {
   position: relative;
   /* padding: 4px 8px; */
   width: 100%;
+}
+
+.main-content {
+  padding-top: calc(env(safe-area-inset-top) + 58px);
 }
 
 @media (min-width: 554px) {
