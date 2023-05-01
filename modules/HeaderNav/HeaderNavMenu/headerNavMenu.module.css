@@ -1,9 +1,19 @@
-.header-nav-logo-img {
+.header-nav-menu-wrapper {
+  display: block;
+}
+
+@media (min-width: 1440px) {
+  .header-nav-menu-wrapper {
+    display: none;
+  }
+}
+
+.header-nav-menu-img {
   color: #f2f2f2;
   cursor: pointer;
   margin-right: 8px;
 }
 
-.header-nav-logo-img:hover {
+.header-nav-menu-img:hover {
   color: var(--main-color);
 }

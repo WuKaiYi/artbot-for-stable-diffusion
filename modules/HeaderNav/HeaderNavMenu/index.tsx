@@ -4,11 +4,12 @@ import styles from './headerNavMenu.module.css'
 
 const HeaderNavMenu = () => {
   return (
-    <>
-      <div className="block 2xl:hidden" onClick={() => setShowAppMenu(true)}>
-        <IconMenu2 className={styles['header-nav-logo-img']} />
-      </div>
-    </>
+    <div
+      className={styles['header-nav-menu-wrapper']}
+      onClick={() => setShowAppMenu(true)}
+    >
+      <IconMenu2 className={styles['header-nav-menu-img']} />
+    </div>
   )
 }
 

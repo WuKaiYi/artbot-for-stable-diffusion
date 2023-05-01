@@ -10,7 +10,6 @@ import withDarkMode from 'next-dark-mode'
 import { initAppSettings } from '../utils/appSettings'
 import ContentWrapper from '../components/UI/ContentWrapper'
 import Footer from '../components/UI/Footer'
-import Header from '../components/UI/Header'
 import PollController from '../components/PollController'
 
 import 'react-toastify/dist/ReactToastify.css'
@@ -34,6 +33,7 @@ import ErrorComponent, { logErrorInComponent } from 'components/ErrorComponent'
 import ServerUpdateComponent from 'components/ServerUpdateComponent'
 import { useWindowSize } from 'hooks/useWindowSize'
 import HeaderNav from 'modules/HeaderNav'
+import MenuSlider from 'modules/MenuSlider'
 
 initBrowserTab()
 initAppSettings()
@@ -199,7 +199,7 @@ function MyApp({ Component, darkMode, pageProps }: MyAppProps) {
       <PollController />
       <HeaderNav />
       <ContentWrapper>
-        <Menu show={showAppMenu} />
+        <MenuSlider />
         {/* <Header /> */}
         <div className="main-content absolute mx-auto w-full md:pb-[0] md:relative px-[8px]">
           <ToastContainer
