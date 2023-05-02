@@ -263,9 +263,9 @@ function MyApp({ Component, darkMode, pageProps }: MyAppProps) {
             </div>
           </ErrorBoundary>
           <Footer />
-          {size &&
-            // @ts-ignore
+          {size?.width &&
             size.width >= 890 &&
+            size.width < 1440 &&
             !imageDetailsModalOpen && (
               <div className="fixed right-[6px] bottom-[2px] max-w-[156px]">
                 <AdContainer

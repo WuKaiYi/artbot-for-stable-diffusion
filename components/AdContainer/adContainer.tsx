@@ -1,6 +1,8 @@
 import clsx from 'clsx'
-import React, { useRef } from 'react'
-import { useEffectOnce } from '../../hooks/useEffectOnce'
+import React, { useEffect, useRef } from 'react'
+import { useRouter } from 'next/router'
+
+const AD_BLOCK_ID = 'carbonads'
 
 function AdContainer({
   code = 'CWYD62QI',
@@ -12,30 +14,46 @@ function AdContainer({
   maxSize?: number
   override?: false
 }) {
+  const router = useRouter()
   const reference = useRef<HTMLInputElement | undefined>()
 
-  useEffectOnce(() => {
+  const createAd = () => {
+    if (document.getElementById('carbonads')) {
+      return
+    }
+
+    if (
+      typeof reference === 'undefined' ||
+      typeof reference.current === 'undefined' ||
+      !reference ||
+      !reference.current
+    ) {
+      return
+    }
+
+    reference.current.innerHTML = ''
+    const s = document.createElement('script')
+    s.id = '_carbonads_js'
+    s.src = `//cdn.carbonads.com/carbon.js?serve=${code}&placement=${placement}`
+    reference.current.appendChild(s)
+  }
+
+  const removeAd = () => {
+    var element = document.getElementById(AD_BLOCK_ID)
+
+    if (element?.parentNode) {
+      element.parentNode.removeChild(element)
+    }
+  }
+
+  useEffect(() => {
     setTimeout(() => {
-      if (document.getElementById('carbonads')) {
-        return
-      }
-
-      if (
-        typeof reference === 'undefined' ||
-        typeof reference.current === 'undefined' ||
-        !reference ||
-        !reference.current
-      ) {
-        return
-      }
-
-      reference.current.innerHTML = ''
-      const s = document.createElement('script')
-      s.id = '_carbonads_js'
-      s.src = `//cdn.carbonads.com/carbon.js?serve=${code}&placement=${placement}`
-      reference.current.appendChild(s)
-    }, 250)
-  })
+      removeAd()
+      createAd()
+    }, 200)
+    // @ts-ignore
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.pathname])
 
   const classes = ['flex', 'justify-center', 'my-2', `w-full`]
 
@@ -45,7 +63,6 @@ function AdContainer({
 
   return (
     <div
-      // component-name={component}
       id="_adUnit"
       className={clsx(classes)}
       //@ts-ignore

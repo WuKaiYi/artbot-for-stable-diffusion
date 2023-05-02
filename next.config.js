@@ -10,7 +10,7 @@ const nextConfig = {
     domains: ['huggingface.co', 'raw.githubusercontent.com']
   },
   productionBrowserSourceMaps: true,
-  reactStrictMode: true,
+  reactStrictMode: false,
   swcMinify: false // Set to false for now due to issue with React-tooltip
 }
 

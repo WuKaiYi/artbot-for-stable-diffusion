@@ -1,6 +1,7 @@
 import Menu from 'components/Menu'
 import styles from './menuFixed.module.css'
 import { useWindowSize } from 'hooks/useWindowSize'
+import AdContainer from 'components/AdContainer'
 
 const MenuFixed = () => {
   const size = useWindowSize()
@@ -12,6 +13,7 @@ const MenuFixed = () => {
   return (
     <div className={styles['fixed-menu-wrapper']}>
       <Menu />
+      <AdContainer code="CWYD62QI" placement="tinybotsnet" minSize={1440} />
     </div>
   )
 }
