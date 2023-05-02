@@ -9,7 +9,8 @@
   --dark-accent: #8e7fb8;
   --dark-shade: #244975;
 
-  --sticky-footer-margin: -50px;
+  --sticky-footer-padding: 80px;
+  --sticky-footer-margin: -80px;
 
   --btn-primary: #6ab7c6;
   --btn-primary-hover: #8fc9d4;

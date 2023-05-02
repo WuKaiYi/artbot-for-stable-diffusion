@@ -10,7 +10,7 @@ interface FooterProps {
 const StyledFooter = styled.footer<FooterProps>`
   display: none;
   margin-top: auto;
-  margin-bottom: 16px;
+  padding-bottom: calc(env(safe-area-inset-bottom) + 16px);
   padding-top: 16px;
   text-align: center;
 

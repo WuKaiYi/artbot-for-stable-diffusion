@@ -262,7 +262,6 @@ function MyApp({ Component, darkMode, pageProps }: MyAppProps) {
               <Component {...pageProps} />
             </div>
           </ErrorBoundary>
-          <Footer />
           {size?.width &&
             size.width >= 890 &&
             size.width < 1440 &&
@@ -277,7 +276,12 @@ function MyApp({ Component, darkMode, pageProps }: MyAppProps) {
               </div>
             )}
         </div>
+        <div
+          className="push-footer"
+          style={{ height: 'var(--sticky-footer-padding)' }}
+        ></div>
       </ContentWrapper>
+      <Footer />
       <MobileFooter />
     </ThemeProvider>
   )
