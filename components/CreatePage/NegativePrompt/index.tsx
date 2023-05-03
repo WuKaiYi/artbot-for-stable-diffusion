@@ -11,8 +11,9 @@ import {
 } from '@tabler/icons-react'
 import isMobile from 'is-mobile'
 import Tooltip from 'components/Tooltip'
+import PromptInputSettings from 'models/PromptInputSettings'
 
-const NegativePrompt = ({ handleChangeValue, input, setInput }: any) => {
+const NegativePrompt = ({ input, setInput }: any) => {
   const [negativePromptLibraryPanelOpen, setNegativePromptLibraryPanelOpen] =
     useState(false)
 
@@ -58,7 +59,7 @@ const NegativePrompt = ({ handleChangeValue, input, setInput }: any) => {
             setInput({ negative: e.target.value })
           }}
           handleClear={() => {
-            // PromptInputSettings.set('negative', '')
+            PromptInputSettings.set('negative', '')
             setInput({
               negative: ''
             })
@@ -80,11 +81,21 @@ const NegativePrompt = ({ handleChangeValue, input, setInput }: any) => {
           <Tooltip disabled={isMobile()} targetId="negative-load-tooltip">
             Load a negative prompt from your prompt library.
           </Tooltip>
-          <Button id="negative-save-tooltip" className="w-[120px]" size="small">
+          <Button
+            id="negative-save-tooltip"
+            className="w-[120px]"
+            size="small"
+            onClick={handleSaveNeg}
+          >
             <IconDeviceFloppy stroke={1.5} />
             Save
           </Button>
-          <Button id="negative-load-tooltip" className="w-[120px]" size="small">
+          <Button
+            id="negative-load-tooltip"
+            className="w-[120px]"
+            size="small"
+            onClick={() => setNegativePromptLibraryPanelOpen(true)}
+          >
             <IconFolder stroke={1.5} />
             Load
           </Button>
