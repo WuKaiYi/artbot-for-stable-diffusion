@@ -1,8 +1,12 @@
+import { trackEvent } from 'api/telemetry'
+import Tooltip from 'components/Tooltip'
+import TooltipIcon from 'components/TooltipIcon'
 import MaxWidth from 'components/UI/MaxWidth'
 import Section from 'components/UI/Section'
 import Select from 'components/UI/Select'
 import SubSectionTitle from 'components/UI/SubSectionTitle'
 import Samplers from 'controllers/Samplers'
+import ReactSwitch from 'react-switch'
 import { GetSetPromptInput } from 'types'
 import { SourceProcessing } from 'utils/promptUtils'
 
@@ -58,12 +62,11 @@ const SamplersDropdown = ({
     return (
       <Section>
         <SubSectionTitle>
-          <TextTooltipRow>
-            Use all samplers
-            <Tooltip tooltipId="use-all-samplers-tooltip">
-              Automatically generate an image for sampler
-            </Tooltip>
-          </TextTooltipRow>
+          Use all samplers
+          <Tooltip targetId={`use-all-samplers-tooltip`}>
+            Automatically generate an image for each sampler available.
+          </Tooltip>
+          <TooltipIcon id={`use-all-samplers-tooltip`} />
         </SubSectionTitle>
         <ReactSwitch
           disabled={

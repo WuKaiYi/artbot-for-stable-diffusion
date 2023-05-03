@@ -19,10 +19,6 @@ import TextTooltipRow from 'components/UI/TextTooltipRow'
 import Tooltip from 'components/UI/Tooltip'
 import TwoPanel from 'components/UI/TwoPanel'
 
-// Icon imports
-import ArrowBarLeftIcon from '../../icons/ArrowBarLeftIcon'
-import GrainIcon from '../../icons/GrainIcon'
-
 // Utils imports
 import { maxSteps } from 'utils/validationUtils'
 import { SourceProcessing } from 'utils/promptUtils'
@@ -33,7 +29,6 @@ import ControlNetOptions from './ControlNetOptions'
 import HiresFix from './HiresFix'
 import InputSwitch from './InputSwitch'
 import NumericInputSlider from './NumericInputSlider'
-import Samplers from './Samplers'
 import SelectModel from './SelectModel'
 import UpscalerOptions from './UpscalerOptions'
 
