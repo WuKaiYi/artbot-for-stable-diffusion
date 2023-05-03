@@ -112,6 +112,17 @@ export interface IImageDetails {
   img2img: boolean
 }
 
+interface ImageOrientation {
+  label: string
+  orientation: string
+  height: number
+  width: number
+}
+
+export interface OrientationLookup {
+  [key: string]: ImageOrientation
+}
+
 export interface CreatePendingJob {
   id?: number
   timestamp: number
@@ -146,6 +157,20 @@ export interface DiffusionModel {
   name: string
   count: number
   performance: number
+}
+
+export interface SelectPropsComponent {
+  className?: string
+  isDisabled?: boolean
+  isMulti?: boolean
+  isSearchable?: boolean
+  menuPlacement?: string
+  name?: string
+  onChange: any
+  options: Array<any>
+  styles?: any
+  value?: Value
+  width?: string
 }
 
 export interface GenerateResponse {

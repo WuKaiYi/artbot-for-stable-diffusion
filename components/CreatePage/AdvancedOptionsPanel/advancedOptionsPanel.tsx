@@ -33,7 +33,6 @@ import ControlNetOptions from './ControlNetOptions'
 import HiresFix from './HiresFix'
 import InputSwitch from './InputSwitch'
 import NumericInputSlider from './NumericInputSlider'
-import OrientationOptions from './OrientationOptions'
 import Samplers from './Samplers'
 import SelectModel from './SelectModel'
 import UpscalerOptions from './UpscalerOptions'
@@ -53,6 +52,7 @@ import { trackEvent } from 'api/telemetry'
 import { MAX_IMAGES_PER_JOB } from '_constants'
 import RenderParentImage from 'components/ParentImage'
 import StylesDropdown from '../StylesDropdown'
+import ImageOrientationOptions from 'modules/ImageOrientationOptions'
 
 const NoSliderSpacer = styled.div`
   height: 14px;
@@ -200,7 +200,7 @@ const AdvancedOptionsPanel = ({ input, setInput }: Props) => {
       <div className="flex flex-row items-center justify-start w-full gap-2 text-sm md:w-1/2">
         <StylesDropdown input={input} setInput={setInput} isSearchable={true} />
       </div>
-      <OrientationOptions input={input} setInput={setInput} />
+      <ImageOrientationOptions input={input} setInput={setInput} />
       <Samplers
         input={input}
         setInput={setInput}

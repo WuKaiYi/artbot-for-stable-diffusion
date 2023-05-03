@@ -34,7 +34,8 @@ const SelectComponent = (props: SelectProps) => {
 
   const customStyles = {
     container: (provided: CSSProperties) => ({
-      ...provided
+      ...provided,
+      width: '100%'
     }),
     control: (provided: CSSProperties) => ({
       ...provided,
