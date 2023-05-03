@@ -479,7 +479,7 @@ const AdvancedOptionsPanel = ({ input, setInput }: Props) => {
               <GrainIcon />
             </Button>
             <Button
-              btnType="secondary"
+              theme="secondary"
               title="Clear"
               onClick={() => {
                 PromptInputSettings.set('seed', '')

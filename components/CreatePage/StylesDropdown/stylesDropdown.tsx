@@ -86,7 +86,7 @@ const StylesDrodown = ({ input, setInput }: IProps) => {
           value={presetValue}
         />
         <Button
-          btnType="secondary"
+          theme="secondary"
           onClick={() => {
             setInput({ stylePreset: 'none' })
           }}

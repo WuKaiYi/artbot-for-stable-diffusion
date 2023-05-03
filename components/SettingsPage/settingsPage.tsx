@@ -452,7 +452,7 @@ const SettingsPage = () => {
                   </div>
                   <div className="flex justify-start gap-2 mt-2">
                     <Button
-                      btnType="secondary"
+                      theme="secondary"
                       onClick={() => {
                         unsetUserInfo()
                         setComponentState({ apiKey: '' })
@@ -607,7 +607,7 @@ const SettingsPage = () => {
                   />
                   <div className="flex justify-start gap-2 mt-2">
                     <Button
-                      btnType="secondary"
+                      theme="secondary"
                       onClick={() => {
                         unsetUserInfo()
                         setComponentState({ useWorkerId: '' })
@@ -968,7 +968,7 @@ const SettingsPage = () => {
                   maxWidth="240"
                 >
                   <Button
-                    btnType="secondary"
+                    theme="secondary"
                     onClick={() =>
                       setComponentState({ showResetConfirmation: true })
                     }
@@ -997,7 +997,7 @@ const SettingsPage = () => {
                   maxWidth="240"
                 >
                   <Button
-                    btnType="secondary"
+                    theme="secondary"
                     onClick={() => {
                       localStorage.removeItem('PromptInputSettings')
                       window.location.assign(`${window.location.origin}/artbot`)
@@ -1027,7 +1027,7 @@ const SettingsPage = () => {
                   maxWidth="240"
                 >
                   <Button
-                    btnType="secondary"
+                    theme="secondary"
                     onClick={async () => {
                       await db.pending.clear()
                       window.location.assign(
