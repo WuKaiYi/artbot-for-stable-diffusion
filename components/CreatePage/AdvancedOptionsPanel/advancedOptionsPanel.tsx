@@ -54,6 +54,7 @@ import RenderParentImage from 'components/ParentImage'
 import StylesDropdown from '../StylesDropdown'
 import ImageOrientationOptions from 'modules/ImageOrientationOptions'
 import SeedInput from 'modules/SeedInput'
+import SamplersDropdown from 'modules/SamplersDropdown'
 
 const NoSliderSpacer = styled.div`
   height: 14px;
@@ -202,11 +203,8 @@ const AdvancedOptionsPanel = ({ input, setInput }: Props) => {
         <StylesDropdown input={input} setInput={setInput} isSearchable={true} />
       </div>
       <ImageOrientationOptions input={input} setInput={setInput} />
-      <Samplers
-        input={input}
-        setInput={setInput}
-        showMultiModel={componentState.showMultiModel}
-      />
+      <SamplersDropdown input={input} setInput={setInput} />
+      {/* <Samplers showMultiModel={componentState.showMultiModel} /> */}
       <TwoPanel className="mt-4">
         <SplitPanel>
           {!input.useMultiSteps && (
