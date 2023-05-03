@@ -33,7 +33,6 @@ import { toast } from 'react-toastify'
 import InteractiveModal from '../components/UI/InteractiveModal/interactiveModal'
 import PromptInputSettings from '../models/PromptInputSettings'
 import { userInfoStore } from '../store/userStore'
-import styles from '../styles/index.module.css'
 import TriggerDropdown from '../components/CreatePage/TriggerDropdown'
 import DefaultPromptInput from '../models/DefaultPromptInput'
 import { logDataForDebugging, logToConsole } from '../utils/debugTools'
@@ -42,7 +41,6 @@ import {
   validatePromptSafety
 } from '../utils/validationUtils'
 import AlertTriangleIcon from '../components/icons/AlertTriangle'
-import clsx from 'clsx'
 import { kudosCostV2 } from '../utils/kudosCost'
 import { CreatePageMode, isSharedLink } from '../utils/loadInputCache'
 import ImageApiParamsToPromptInput from '../models/ImageApiParamsToPromptInput'
@@ -738,14 +736,17 @@ const Home: NextPage = ({ modelDetails, shortlinkImageParams }: any) => {
           </PageTitle>
         </div>
       </div>
-      {modelDetails[input?.models[0]]?.trigger && (
-        <TriggerDropdown
-          setInput={setInput}
-          prompt={input.prompt}
-          triggerArray={triggerArray}
-        />
-      )}
-      <div className={clsx(styles['sticky-text-area'], 'mt-0')}>
+      <div
+        className="flex flex-col w-full gap-2 rounded"
+        style={{ backgroundColor: 'var(--accent-color)', padding: '8px 12px' }}
+      >
+        {modelDetails[input?.models[0]]?.trigger && (
+          <TriggerDropdown
+            setInput={setInput}
+            prompt={input.prompt}
+            triggerArray={triggerArray}
+          />
+        )}
         {flaggedPromptError && (
           <div className="mb-4 bg-red-500 rounded-md px-4 py-2 font-[500] flex flex-row items-center gap-2 text-white">
             <div>
@@ -770,21 +771,21 @@ const Home: NextPage = ({ modelDetails, shortlinkImageParams }: any) => {
           input={input}
           setInput={setInput}
         />
-
-        <ActionPanel
-          errors={errors}
-          input={input}
-          setInput={setInput}
-          resetInput={resetInput}
-          handleSubmit={handleSubmit}
-          pending={pending}
-          totalImagesRequested={totalImagesRequested}
-          loggedIn={loggedIn}
-          totalKudosCost={totalKudosCost}
-          kudosPerImage={kudosPerImage}
-          showStylesDropdown
-        />
       </div>
+
+      <ActionPanel
+        errors={errors}
+        input={input}
+        setInput={setInput}
+        resetInput={resetInput}
+        handleSubmit={handleSubmit}
+        pending={pending}
+        totalImagesRequested={totalImagesRequested}
+        loggedIn={loggedIn}
+        totalKudosCost={totalKudosCost}
+        kudosPerImage={kudosPerImage}
+        showStylesDropdown
+      />
 
       <OptionsPanel input={input} setInput={setInput} />
 

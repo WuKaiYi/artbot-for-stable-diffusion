@@ -1,6 +1,5 @@
 import { useStore } from 'statery'
 import { useEffect } from 'react'
-import styled from 'styled-components'
 import { useRouter } from 'next/router'
 
 import IconCreate from '../icons/CreateIcon'
@@ -19,39 +18,7 @@ import { lockScroll, unlockScroll } from '../../utils/appUtils'
 import PencilIcon from '../icons/PencilIcon'
 import RobotIcon from '../icons/RobotIcon'
 
-const MenuOption = styled.li`
-  align-items: center;
-  column-gap: 8px;
-  cursor: pointer;
-  display: flex;
-  flex-direction: row;
-  font-size: 16px;
-  margin-bottom: 14px;
-
-  &:hover {
-    color: rgb(20, 184, 166);
-  }
-`
-
-const SubOptions = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: -8px;
-  padding-left: 32px;
-  margin-bottom: 12px;
-`
-
-const SubOption = styled.div`
-  cursor: pointer;
-  display: flex;
-  flex-direction: row;
-  font-size: 16px;
-  column-gap: 4px;
-
-  &:hover {
-    color: rgb(20, 184, 166);
-  }
-`
+import styles from './menu.module.css'
 
 const Menu = () => {
   const router = useRouter()
@@ -77,206 +44,230 @@ const Menu = () => {
 
   return (
     <ul>
-      <MenuOption
+      <li
+        className={styles['menu-option']}
         onClick={() => {
           navigateToLink('/')
         }}
       >
         <IconCreate />
         Create
-      </MenuOption>
-      <SubOptions>
-        <SubOption
+      </li>
+      <div className={styles['menu-sub-options']}>
+        <div
+          className={styles['menu-sub-option']}
           onClick={() => {
             navigateToLink('/controlnet')
           }}
         >
           <LineDashedIcon />
           ControlNet
-        </SubOption>
-        <SubOption
+        </div>
+        <div
+          className={styles['menu-sub-option']}
           onClick={() => {
             navigateToLink('/?panel=img2img')
           }}
         >
           <LineDashedIcon />
           img2img
-        </SubOption>
-        <SubOption
+        </div>
+        <div
+          className={styles['menu-sub-option']}
           onClick={() => {
             navigateToLink('/?panel=inpainting')
           }}
         >
           <LineDashedIcon />
           Inpainting
-        </SubOption>
-        <SubOption
+        </div>
+        <div
+          className={styles['menu-sub-option']}
           onClick={() => {
             navigateToLink('/live-paint')
           }}
         >
           <LineDashedIcon />
           Live Paint
-        </SubOption>
-      </SubOptions>
-      <MenuOption
+        </div>
+      </div>
+      <li
+        className={styles['menu-option']}
         onClick={() => {
           navigateToLink('/draw')
         }}
       >
         <PencilIcon />
         Draw
-      </MenuOption>
-      <MenuOption
+      </li>
+      <li
+        className={styles['menu-option']}
         onClick={() => {
           navigateToLink('/interrogate')
         }}
       >
         <ZoomQuestionIcon />
         Interrogate
-      </MenuOption>
-      <MenuOption
+      </li>
+      <li
+        className={styles['menu-option']}
         onClick={() => {
           navigateToLink('/rate')
         }}
       >
         <StarsIcon />
         Rate Images
-      </MenuOption>
-      <MenuOption
+      </li>
+      <li
+        className={styles['menu-option']}
         onClick={() => {
           navigateToLink('/pending')
         }}
       >
         <HourglassIcon />
         Pending
-      </MenuOption>
-      <MenuOption
+      </li>
+      <li
+        className={styles['menu-option']}
         onClick={() => {
           navigateToLink('/images')
         }}
       >
         <PhotoIcon />
         Images
-      </MenuOption>
-      <MenuOption
+      </li>
+      <li
+        className={styles['menu-option']}
         onClick={() => {
           navigateToLink('/info')
         }}
       >
         <InfoIcon />
         Info
-      </MenuOption>
-      <SubOptions>
-        <SubOption
+      </li>
+      <div className={styles['menu-sub-options']}>
+        <div
+          className={styles['menu-sub-option']}
           onClick={() => {
             navigateToLink('/info/models')
           }}
         >
           <LineDashedIcon />
           Model Details
-        </SubOption>
-        <SubOption
+        </div>
+        <div
+          className={styles['menu-sub-option']}
           onClick={() => {
             navigateToLink('/info/models/updates')
           }}
         >
           <LineDashedIcon />
           Model Updates
-        </SubOption>
-        <SubOption
+        </div>
+        <div
+          className={styles['menu-sub-option']}
           onClick={() => {
             navigateToLink('/info/models?show=favorite-models')
           }}
         >
           <LineDashedIcon />
           Favorite Models
-        </SubOption>
-        <SubOption
+        </div>
+        <div
+          className={styles['menu-sub-option']}
           onClick={() => {
             navigateToLink('/info/workers')
           }}
         >
           <LineDashedIcon />
           Worker details
-        </SubOption>
-      </SubOptions>
-      <MenuOption
+        </div>
+      </div>
+      <li
+        className={styles['menu-option']}
         onClick={() => {
           navigateToLink('/faq')
         }}
       >
         <QuestionMarkIcon />
         FAQ
-      </MenuOption>
-      <MenuOption
+      </li>
+      <li
+        className={styles['menu-option']}
         onClick={() => {
           navigateToLink('/changelog')
         }}
       >
         <NotesIcon />
         Changelog
-      </MenuOption>
-      <MenuOption
+      </li>
+      <li
+        className={styles['menu-option']}
         onClick={() => {
           navigateToLink('/settings')
         }}
       >
         <SettingsIcon />
         Settings
-      </MenuOption>
-      <SubOptions>
-        <SubOption
+      </li>
+      <div className={styles['menu-sub-options']}>
+        <div
+          className={styles['menu-sub-option']}
           onClick={() => {
             navigateToLink('/settings')
           }}
         >
           <LineDashedIcon />
           Stable Horde Settings
-        </SubOption>
-        <SubOption
+        </div>
+        <div
+          className={styles['menu-sub-option']}
           onClick={() => {
             navigateToLink('/settings?panel=workers')
           }}
         >
           <LineDashedIcon />
           Manage Workers
-        </SubOption>
-        <SubOption
+        </div>
+        <div
+          className={styles['menu-sub-option']}
           onClick={() => {
             navigateToLink('/settings?panel=prefs')
           }}
         >
           <LineDashedIcon />
           ArtBot Prefs
-        </SubOption>
-      </SubOptions>
-      <MenuOption
+        </div>
+      </div>
+      <li
+        className={styles['menu-option']}
         onClick={() => {
           navigateToLink('/profile')
         }}
       >
         <RobotIcon />
         User Profile
-      </MenuOption>
-      <MenuOption
+      </li>
+      <li
+        className={styles['menu-option']}
         onClick={() => {
           navigateToLink('/about')
         }}
       >
         <HelpIcon />
         About
-      </MenuOption>
-      <SubOptions>
-        <SubOption
+      </li>
+      <div className={styles['menu-sub-options']}>
+        <div
+          className={styles['menu-sub-option']}
           onClick={() => {
             navigateToLink('/contact')
           }}
         >
           <LineDashedIcon />
           Contact
-        </SubOption>
-      </SubOptions>
+        </div>
+      </div>
     </ul>
   )
 }
