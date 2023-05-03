@@ -9,7 +9,6 @@
   position: fixed;
   top: 52px;
   width: var(--sidebar-width);
-  z-index: 30;
 
   overflow-y: auto;
   -ms-overflow-style: none; /* IE and Edge */
