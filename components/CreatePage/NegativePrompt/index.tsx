@@ -1,18 +1,16 @@
 import { trackEvent } from 'api/telemetry'
 import { Button } from 'components/UI/Button'
-import FlexRow from 'components/UI/FlexRow'
-import Section from 'components/UI/Section'
-import TextArea from 'components/UI/TextArea'
-import TextButton from 'components/UI/TextButton'
-import TextTooltipRow from 'components/UI/TextTooltipRow'
-import ArrowBarLeftIcon from 'components/icons/ArrowBarLeftIcon'
-import PlaylistXIcon from 'components/icons/PlaylistXIcon'
-import PromptInputSettings from 'models/PromptInputSettings'
 import { useCallback, useState } from 'react'
-import { Tooltip } from 'react-tooltip'
 import { db, getDefaultPrompt, setDefaultPrompt } from 'utils/db'
 import NegativePrompts from '../NegativePrompts'
-import BookIcon from 'components/icons/BookIcon'
+import PromptTextArea from 'modules/PromptTextArea'
+import {
+  IconDeviceFloppy,
+  IconFolder,
+  IconPlaylistX
+} from '@tabler/icons-react'
+import isMobile from 'is-mobile'
+import Tooltip from 'components/Tooltip'
 
 const NegativePrompt = ({ handleChangeValue, input, setInput }: any) => {
   const [negativePromptLibraryPanelOpen, setNegativePromptLibraryPanelOpen] =
@@ -54,65 +52,44 @@ const NegativePrompt = ({ handleChangeValue, input, setInput }: any) => {
           setInput={setInput}
         />
       )}
-      <Section>
-        <div>
-          <TextTooltipRow>
-            <div className="flex flex-row items-center gap-2 mt-0 mb-1 text-sm font-bold">
-              <PlaylistXIcon />
+      <div className="flex flex-col gap-1">
+        <PromptTextArea
+          handleChangeValue={(e) => {
+            setInput({ negative: e.target.value })
+          }}
+          handleClear={() => {
+            // PromptInputSettings.set('negative', '')
+            setInput({
+              negative: ''
+            })
+          }}
+          label={
+            <>
+              <IconPlaylistX />
               Negative prompt{' '}
               <span className="font-[400] text-xs">(optional)</span>
-            </div>
-            <Tooltip
-              // @ts-ignore
-              tooltipId="negative-prompt-tooltip"
-            >
-              Add words or phrases to demphasize from your desired image
-            </Tooltip>
-          </TextTooltipRow>
+            </>
+          }
+          placeholder="Words to de-emphasize from this image"
+          value={input.negative}
+        />
+        <div className="flex flex-row gap-2">
+          <Tooltip disabled={isMobile()} targetId="negative-save-tooltip">
+            Save negative prompt to your prompt library.
+          </Tooltip>
+          <Tooltip disabled={isMobile()} targetId="negative-load-tooltip">
+            Load a negative prompt from your prompt library.
+          </Tooltip>
+          <Button id="negative-save-tooltip" className="w-[120px]" size="small">
+            <IconDeviceFloppy stroke={1.5} />
+            Save
+          </Button>
+          <Button id="negative-load-tooltip" className="w-[120px]" size="small">
+            <IconFolder stroke={1.5} />
+            Load
+          </Button>
         </div>
-        <FlexRow>
-          <TextArea
-            name="negative"
-            placeholder="Words to deemphasize from image"
-            onChange={handleChangeValue}
-            value={input.negative}
-          />
-          <div className="flex flex-col gap-2">
-            <Button
-              title="Clear current input"
-              btnType="secondary"
-              onClick={() => {
-                PromptInputSettings.set('negative', '')
-                setInput({
-                  negative: ''
-                })
-              }}
-            >
-              <ArrowBarLeftIcon />
-            </Button>
-            <Button
-              title="Show negative prompt library"
-              onClick={() => {
-                setNegativePromptLibraryPanelOpen(true)
-              }}
-            >
-              <BookIcon />
-            </Button>
-          </div>
-        </FlexRow>
-        <FlexRow className="mt-1">
-          <TextButton
-            onClick={() => {
-              setDefaultPrompt('')
-              PromptInputSettings.set('negative', '')
-              setInput({ negative: '' })
-            }}
-          >
-            clear default
-          </TextButton>
-          <TextButton onClick={handleSaveNeg}>save as default</TextButton>
-        </FlexRow>
-      </Section>
+      </div>
     </>
   )
 }
