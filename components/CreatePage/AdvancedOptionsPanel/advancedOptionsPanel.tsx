@@ -451,10 +451,7 @@ const AdvancedOptionsPanel = ({ input, setInput }: Props) => {
             </Tooltip>
           </TextTooltipRow>
         </SubSectionTitle>
-        <MaxWidth
-          // @ts-ignore
-          maxWidth="240"
-        >
+        <MaxWidth width="240px">
           <div className="flex flex-row gap-2">
             <Input
               // @ts-ignore
@@ -518,10 +515,7 @@ const AdvancedOptionsPanel = ({ input, setInput }: Props) => {
               </Linker>
             </div>
           </SubSectionTitle>
-          <MaxWidth
-            // @ts-ignore
-            maxWidth="480"
-          >
+          <MaxWidth width="480px">
             <SelectComponent
               isMulti
               menuPlacement={'top'}

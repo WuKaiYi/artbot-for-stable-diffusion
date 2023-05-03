@@ -417,10 +417,7 @@ const SettingsPage = () => {
                     </div>
                   )}
                 </SubSectionTitle>
-                <MaxWidth
-                  // @ts-ignore
-                  maxWidth="480"
-                >
+                <MaxWidth width="480px">
                   {userStore.loggedIn && (
                     <div className="block w-full mt-1 mb-2 text-xs">
                       Logged in as {userStore.username}
@@ -512,10 +509,7 @@ const SettingsPage = () => {
                     NSFW filter will be blacked out.
                   </div>
                 </SubSectionTitle>
-                <MaxWidth
-                  // @ts-ignore
-                  maxWidth="240"
-                >
+                <MaxWidth width="240px">
                   <Switch
                     onChange={() => {
                       if (componentState.allowNsfwImages) {
@@ -537,10 +531,7 @@ const SettingsPage = () => {
                     potentially slower.
                   </div>
                 </SubSectionTitle>
-                <MaxWidth
-                  // @ts-ignore
-                  maxWidth="240"
-                >
+                <MaxWidth width="240px">
                   <Select
                     isSearchable={false}
                     onChange={(obj: any) =>
@@ -566,10 +557,7 @@ const SettingsPage = () => {
                     this incurs an extra kudos cost.
                   </div>
                 </SubSectionTitle>
-                <MaxWidth
-                  // @ts-ignore
-                  maxWidth="240"
-                >
+                <MaxWidth width="240px">
                   <Switch
                     onChange={() => {
                       if (componentState.slow_workers) {
@@ -594,10 +582,7 @@ const SettingsPage = () => {
                     </Linker>
                   </div>
                 </SubSectionTitle>
-                <MaxWidth
-                  // @ts-ignore
-                  maxWidth="480"
-                >
+                <MaxWidth width="480px">
                   <Input
                     type="text"
                     name="steps"
@@ -630,10 +615,7 @@ const SettingsPage = () => {
                       break.
                     </div>
                   </SubSectionTitle>
-                  <MaxWidth
-                    // @ts-ignore
-                    maxWidth="240"
-                  >
+                  <MaxWidth width="240px">
                     <Select
                       options={[
                         { value: true, label: 'Yes' },
@@ -790,10 +772,7 @@ const SettingsPage = () => {
                     ArtBot
                   </div>
                 </SubSectionTitle>
-                <MaxWidth
-                  // @ts-ignore
-                  maxWidth="240"
-                >
+                <MaxWidth width="240px">
                   <Select
                     isSearchable={false}
                     onChange={(obj: any) => {
@@ -842,10 +821,7 @@ const SettingsPage = () => {
                     <Linker href="/images">images gallery page</Linker>.
                   </div>
                 </SubSectionTitle>
-                <MaxWidth
-                  // @ts-ignore
-                  maxWidth="240"
-                >
+                <MaxWidth width="240px">
                   <Switch
                     onChange={() => {
                       if (componentState.enableGallerySwipe) {
@@ -867,10 +843,7 @@ const SettingsPage = () => {
                     receives a new image from the AI Horde backend.
                   </div>
                 </SubSectionTitle>
-                <MaxWidth
-                  // @ts-ignore
-                  maxWidth="240"
-                >
+                <MaxWidth width="240px">
                   <Switch
                     onChange={() => {
                       handleSwitchSelect(
@@ -904,10 +877,7 @@ const SettingsPage = () => {
                     </div>
                   )}
                 </SubSectionTitle>
-                <MaxWidth
-                  // @ts-ignore
-                  maxWidth="240"
-                >
+                <MaxWidth width="240px">
                   <Button
                     onClick={() => {
                       // @ts-ignore
@@ -931,10 +901,7 @@ const SettingsPage = () => {
                     additional logs.
                   </div>
                 </SubSectionTitle>
-                <MaxWidth
-                  // @ts-ignore
-                  maxWidth="240"
-                >
+                <MaxWidth width="240px">
                   <Button
                     onClick={() => {
                       //@ts-ignore
@@ -963,10 +930,7 @@ const SettingsPage = () => {
                     reset.
                   </div>
                 </SubSectionTitle>
-                <MaxWidth
-                  // @ts-ignore
-                  maxWidth="240"
-                >
+                <MaxWidth width="240px">
                   <Button
                     theme="secondary"
                     onClick={() =>
@@ -992,10 +956,7 @@ const SettingsPage = () => {
                     reset.
                   </div>
                 </SubSectionTitle>
-                <MaxWidth
-                  // @ts-ignore
-                  maxWidth="240"
-                >
+                <MaxWidth width="240px">
                   <Button
                     theme="secondary"
                     onClick={() => {
@@ -1022,10 +983,7 @@ const SettingsPage = () => {
                     still be available after this reset.
                   </div>
                 </SubSectionTitle>
-                <MaxWidth
-                  // @ts-ignore
-                  maxWidth="240"
-                >
+                <MaxWidth width="240px">
                   <Button
                     theme="secondary"
                     onClick={async () => {
@@ -1049,8 +1007,7 @@ const SettingsPage = () => {
                   </div>
                 </SubSectionTitle>
                 <MaxWidth
-                  // @ts-ignore
-                  maxWidth="240"
+                  width="240px"
                 >
                   <Select
                     options={[

@@ -513,10 +513,7 @@ const ControlNet = () => {
             </Tooltip>
           </TextTooltipRow>
         </SubSectionTitle>
-        <MaxWidth
-          // @ts-ignore
-          maxWidth="240"
-        >
+        <MaxWidth width="240px">
           <div className="flex flex-row gap-2">
             <Input
               // @ts-ignore
