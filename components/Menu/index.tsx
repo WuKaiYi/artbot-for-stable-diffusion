@@ -20,7 +20,7 @@ import RobotIcon from '../icons/RobotIcon'
 
 import styles from './menu.module.css'
 
-const Menu = () => {
+const Menu = ({ className }: { className?: string }) => {
   const router = useRouter()
   const appState = useStore(appInfoStore)
   const { showAppMenu } = appState
@@ -43,7 +43,7 @@ const Menu = () => {
   }, [showAppMenu])
 
   return (
-    <ul>
+    <ul className={className}>
       <li
         className={styles['menu-option']}
         onClick={() => {

@@ -53,6 +53,7 @@ import { MAX_IMAGES_PER_JOB } from '_constants'
 import RenderParentImage from 'components/ParentImage'
 import StylesDropdown from '../StylesDropdown'
 import ImageOrientationOptions from 'modules/ImageOrientationOptions'
+import SeedInput from 'modules/SeedInput'
 
 const NoSliderSpacer = styled.div`
   height: 14px;
@@ -442,52 +443,7 @@ const AdvancedOptionsPanel = ({ input, setInput }: Props) => {
           ) : null
         }
       />
-      <Section>
-        <SubSectionTitle>
-          <TextTooltipRow>
-            Seed
-            <Tooltip tooltipId="seed-tooltip">
-              Leave seed blank for random.
-            </Tooltip>
-          </TextTooltipRow>
-        </SubSectionTitle>
-        <MaxWidth width="240px">
-          <div className="flex flex-row gap-2">
-            <Input
-              // @ts-ignore
-              className="mb-2"
-              type="text"
-              name="seed"
-              onChange={handleChangeInput}
-              // @ts-ignore
-              value={input.seed}
-              width="100%"
-            />
-            <Button
-              title="Insert random seed"
-              onClick={() => {
-                const value = Math.abs((Math.random() * 2 ** 32) | 0)
-                if (AppSettings.get('saveSeedOnCreate')) {
-                  PromptInputSettings.set('seed', value)
-                }
-                setInput({ seed: value })
-              }}
-            >
-              <GrainIcon />
-            </Button>
-            <Button
-              theme="secondary"
-              title="Clear"
-              onClick={() => {
-                PromptInputSettings.set('seed', '')
-                setInput({ seed: '' })
-              }}
-            >
-              <ArrowBarLeftIcon />
-            </Button>
-          </div>
-        </MaxWidth>
-      </Section>
+      <SeedInput input={input} setInput={setInput} />
       {input.source_processing !== SourceProcessing.OutPainting &&
         !input.useAllModels &&
         !componentState.showMultiModel &&

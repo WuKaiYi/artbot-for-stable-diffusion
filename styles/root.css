@@ -21,7 +21,7 @@
   --input-background: #ffffff;
   --input-text: #282828;
 
-  --sidebar-width: 280px;
+  --sidebar-width: 240px;
 
   /** Controls opacity for react-tooltip */
   --rt-opacity: 0.95;

@@ -55,7 +55,7 @@ function AdContainer({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.pathname])
 
-  const classes = ['flex', 'justify-center', 'my-2', `w-full`]
+  const classes = ['flex', 'justify-center', `w-full`]
 
   if (typeof window === 'undefined') {
     return null

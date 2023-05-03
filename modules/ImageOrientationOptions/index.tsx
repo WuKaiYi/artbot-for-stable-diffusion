@@ -179,12 +179,12 @@ const ImageOrientationOptions = ({
               {keepAspectRatio ? (
                 <>
                   <IconLock stroke={1.5} />
-                  Lock ratio
+                  Unlock ratio
                 </>
               ) : (
                 <>
                   <IconLockOpen stroke={1.5} />
-                  Unlock ratio
+                  Lock ratio
                 </>
               )}
             </Button>

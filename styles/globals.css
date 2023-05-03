@@ -155,6 +155,7 @@ a {
 
 #carbonads .carbon-img {
   flex: 0 0 130px;
+  margin: 0 auto;
 }
 
 #carbonads .carbon-img img {
