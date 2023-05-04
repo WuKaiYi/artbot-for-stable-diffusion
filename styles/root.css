@@ -2,6 +2,8 @@
   --body-color: #f2f2f2;
   --text-color: #244975;
   --text-shade: #ffffff;
+  --link-text: #17cfbb;
+  --link-active: #5eedde;
 
   --light-shade: #efedef;
   --light-accent: #9ca8bd;
@@ -36,6 +38,8 @@
     --body-color: #222222;
     --text-color: #efedef;
     --text-shade: #f3f3ef;
+    --link-text: #5eedde;
+    --link-active: #17cfbb;
 
     --input-background: rgb(42, 48, 60);
     --input-text: #e1e1e1;

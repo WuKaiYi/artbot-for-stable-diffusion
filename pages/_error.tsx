@@ -1,20 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import styled from 'styled-components'
 import PageTitle from '../components/UI/PageTitle'
 import { useEffectOnce } from '../hooks/useEffectOnce'
 import { userInfoStore } from '../store/userStore'
 import { logError } from '../utils/appUtils'
-
-const StyledLink = styled.a`
-  color: ${(props) => props.theme.link};
-  font-weight: 600;
-
-  &:hover {
-    color: ${(props) => props.theme.linkActive};
-  }
-`
+import styles from '../components/ErrorComponent/component.module.css'
 
 export default function ErrorPage({ err }: { err: any }) {
   const router = useRouter()
@@ -52,23 +43,27 @@ export default function ErrorPage({ err }: { err: any }) {
       </div>
       <div className="mb-[8px]">
         Please hit the{' '}
-        <StyledLink href="/artbot/contact">contact form</StyledLink> if
-        you&apos;d like to provide more information about what happened or{' '}
-        <StyledLink
+        <a className={styles['StyledLink']} href="/artbot/contact">
+          contact form
+        </a>{' '}
+        if you&apos;d like to provide more information about what happened or{' '}
+        <a
+          className={styles['StyledLink']}
           href="https://discord.com/channels/781145214752129095/1038867597543882894"
           target="_blank"
           rel="noopener noreferrer"
         >
           visit the ArtBot channel
-        </StyledLink>{' '}
+        </a>{' '}
         on the{' '}
-        <StyledLink
+        <a
+          className={styles['StyledLink']}
           href="https://discord.gg/3DxrhksKzn"
           target="_blank"
           rel="noreferrer"
         >
           Stable Horde Discord server
-        </StyledLink>{' '}
+        </a>{' '}
         .
       </div>
     </div>

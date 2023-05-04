@@ -21,20 +21,11 @@ import RecycleIcon from '../icons/RecycleIcon'
 import { clientHeader } from '../../utils/appUtils'
 import FlexRow from '../UI/FlexRow'
 import TextButton from 'components/UI/TextButton'
+import SubSectionTitle from 'components/UI/SubSectionTitle'
+import Section from 'components/UI/Section'
 
 const ContentWrapper = styled.div`
   padding-top: 16px;
-`
-
-const Section = styled.div`
-  padding-top: 16px;
-  &:first-child {
-    padding-top: 0;
-  }
-`
-
-const SubSectionTitle = styled.div`
-  padding-bottom: 8px;
 `
 
 const InterrogationKey = styled.div`
@@ -532,7 +523,7 @@ const Interrogate = () => {
             />
             <Button
               title="Upload image from URL"
-              btnType="primary"
+              theme="primary"
               onClick={() =>
                 submitInterrogation({ source_image: componentState.imgUrl })
               }

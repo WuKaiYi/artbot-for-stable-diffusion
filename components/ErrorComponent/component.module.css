@@ -1,0 +1,9 @@
+/* StyledLink */
+.StyledLink {
+  color: var(--link-text);
+  font-weight: 600;
+}
+
+.StyledLink:hover {
+  color: var(--link-active);
+}

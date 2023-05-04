@@ -1,16 +1,9 @@
-import styled from 'styled-components'
 import useComponentState from '../../hooks/useComponentState'
 import { useEffectOnce } from '../../hooks/useEffectOnce'
 import { clientHeader } from '../../utils/appUtils'
 import Row from '../Row'
 import SelectComponent from '../UI/Select'
 import WorkerInfo from '../WorkerInfo'
-
-const WorkersList = styled.div`
-  display: flex;
-  flex-direction: column;
-  row-gap: 12px;
-`
 
 const WorkerInfoPage = () => {
   const [componentState, setComponentState] = useComponentState({
@@ -113,11 +106,17 @@ const WorkerInfoPage = () => {
           />
         </div>
       </Row>
-      <WorkersList>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          rowGap: '12px'
+        }}
+      >
         {sortedWorkers?.map((worker: any) => {
           return <WorkerInfo editable={false} key={worker.id} worker={worker} />
         })}
-      </WorkersList>
+      </div>
     </>
   )
 }
