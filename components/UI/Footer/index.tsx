@@ -1,30 +1,8 @@
 import { useEffect, useState } from 'react'
-import styled from 'styled-components'
-import { isInstalledPwa } from '../../utils/appUtils'
-import Linker from './Linker'
-
-interface FooterProps {
-  isSafari: boolean
-}
-
-const StyledFooter = styled.footer<FooterProps>`
-  display: none;
-  margin-top: auto;
-  padding-bottom: calc(env(safe-area-inset-bottom) + 16px);
-  padding-top: 16px;
-  text-align: center;
-
-  ${(props) =>
-    props.isSafari &&
-    `
-    margin-bottom: 160px;
-    `}
-
-  @media (min-width: 640px) {
-    display: block;
-    padding-top: 16px;
-  }
-`
+import { isInstalledPwa } from '../../../utils/appUtils'
+import Linker from '../Linker'
+import styles from './footer.module.css'
+import clsx from 'clsx'
 
 export default function Footer() {
   const [isSafari, setIsSafari] = useState(false)
@@ -43,7 +21,11 @@ export default function Footer() {
   }
 
   return (
-    <StyledFooter isSafari={isSafari}>
+    <div
+      className={clsx(styles['StyledFooter'], {
+        [styles['isSafari']]: isSafari
+      })}
+    >
       <div>
         Web app created with ❤️ by{' '}
         <Linker
@@ -66,6 +48,6 @@ export default function Footer() {
           github
         </Linker>
       </div>
-    </StyledFooter>
+    </div>
   )
 }
