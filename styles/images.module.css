@@ -1,0 +1,47 @@
+/* MenuSeparator */
+.MenuSeparator {
+  width: 100%;
+  border-bottom: 1px solid var(--main-color);
+}
+
+/* ImageOverlay */
+.ImageOverlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: gray;
+  opacity: 0.6;
+}
+
+/* SelectCheck */
+.SelectCheck {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+}
+
+/* StyledHeartIcon */
+.StyledHeartIcon {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
+
+/* ButtonContainer */
+.ButtonContainer {
+  column-gap: 8px;
+  display: flex;
+  flex-direction: row;
+  row-gap: 4px;
+  max-width: 240px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+@media (min-width: 640px) {
+  .ButtonContainer {
+    max-width: 100%;
+  }
+}

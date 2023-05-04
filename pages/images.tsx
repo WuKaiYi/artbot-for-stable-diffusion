@@ -4,7 +4,6 @@ import React, { useCallback, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import LazyLoad from 'react-lazyload'
-import styled from 'styled-components'
 
 import PageTitle from '../components/UI/PageTitle'
 import Spinner from '../components/Spinner'
@@ -27,7 +26,6 @@ import TextButton from '../components/UI/TextButton'
 import ConfirmationModal from '../components/ConfirmationModal'
 import MenuButton from '../components/UI/MenuButton'
 import FilterIcon from '../components/icons/FilterIcon'
-import HeartIcon from '../components/icons/HeartIcon'
 import useComponentState from '../hooks/useComponentState'
 import { downloadImages } from '../utils/imageUtils'
 import { useSwipeable } from 'react-swipeable'
@@ -45,52 +43,17 @@ import FloatingActionButton from '../components/UI/FloatingActionButton'
 import TrashIcon from '../components/icons/TrashIcon'
 import { useStore } from 'statery'
 import { appInfoStore } from 'store/appStore'
+import styles from '../styles/images.module.css'
+import { IconCircleCheck, IconHeart } from '@tabler/icons-react'
 
-const MenuSeparator = styled.div`
-  width: 100%;
-  border-bottom: 1px solid ${(props) => props.theme.navLinkActive};
-`
-
-const NonLink = styled.div`
-  cursor: pointer;
-  position: relative;
-`
-
-const ImageOverlay = styled.div`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  background-color: gray;
-  opacity: 0.6;
-`
-
-const SelectCheck = styled(CircleCheckIcon)`
-  position: absolute;
-  bottom: 4px;
-  right: 4px;
-`
-
-const StyledHeartIcon = styled(HeartIcon)`
-  position: absolute;
-  top: 4px;
-  right: 4px;
-`
-
-const ButtonContainer = styled.div`
-  column-gap: 8px;
-  display: flex;
-  flex-direction: row;
-  row-gap: 4px;
-  max-width: 240px;
-  flex-wrap: wrap;
-  justify-content: end;
-
-  @media (min-width: 640px) {
-    max-width: 100%;
-  }
-`
+const NonLink = (props: any) => {
+  const { children, ...rest } = props
+  return (
+    <div style={{ cursor: 'pointer', position: 'relative' }} {...rest}>
+      {children}
+    </div>
+  )
+}
 
 const ImagesPage = () => {
   const handlers = useSwipeable({
@@ -654,7 +617,7 @@ const ImagesPage = () => {
                 >
                   Show upscaled
                 </DropDownMenuItem>
-                <MenuSeparator />
+                <div className={styles['MenuSeparator']} />
                 <DropDownMenuItem
                   onClick={() => {
                     setComponentState({
@@ -765,7 +728,7 @@ const ImagesPage = () => {
               >
                 Dynamic Layout
               </DropDownMenuItem>
-              <MenuSeparator />
+              <div className={styles['MenuSeparator']} />
               <DropDownMenuItem
                 onClick={() => {
                   setComponentState({
@@ -835,7 +798,7 @@ const ImagesPage = () => {
             <div className="mb-2 text-sm text-teal-500">
               selected ({componentState.deleteSelection.length})
             </div>
-            <ButtonContainer>
+            <div className={styles['ButtonContainer']}>
               <TextButton
                 onClick={() => {
                   setComponentState({ deleteMode: false, deleteSelection: [] })
@@ -866,7 +829,7 @@ const ImagesPage = () => {
               >
                 delete
               </TextButton>
-            </ButtonContainer>
+            </div>
           </>
         )}
       </div>
@@ -952,19 +915,31 @@ const ImagesPage = () => {
                           />
                           {componentState.deleteMode &&
                             componentState.deleteSelection.indexOf(image.id) >=
-                              0 && <ImageOverlay></ImageOverlay>}
+                              0 && (
+                              <div className={styles['ImageOverlay']}></div>
+                            )}
                           {componentState.deleteMode &&
                             componentState.deleteSelection.indexOf(image.id) ===
-                              -1 && <SelectCheck />}
+                              -1 && (
+                              <IconCircleCheck
+                                className={styles['SelectCheck']}
+                              />
+                            )}
                           {componentState.deleteMode &&
                             componentState.deleteSelection.indexOf(image.id) >=
-                              0 && <SelectCheck fill="blue" stroke="white" />}
+                              0 && (
+                              <IconCircleCheck
+                                fill="blue"
+                                color="white"
+                                className={styles['SelectCheck']}
+                              />
+                            )}
                           {image.favorited && (
-                            <StyledHeartIcon
+                            <IconHeart
+                              className={styles['StyledHeartIcon']}
                               fill="#14B8A6"
                               width={1}
                               size={32}
-                              shadow
                             />
                           )}
                         </LinkEl>
@@ -1007,19 +982,31 @@ const ImagesPage = () => {
                           />
                           {componentState.deleteMode &&
                             componentState.deleteSelection.indexOf(image.id) >=
-                              0 && <ImageOverlay></ImageOverlay>}
+                              0 && (
+                              <div className={styles['ImageOverlay']}></div>
+                            )}
                           {componentState.deleteMode &&
                             componentState.deleteSelection.indexOf(image.id) ===
-                              -1 && <SelectCheck />}
+                              -1 && (
+                              <IconCircleCheck
+                                className={styles['SelectCheck']}
+                              />
+                            )}
                           {componentState.deleteMode &&
                             componentState.deleteSelection.indexOf(image.id) >=
-                              0 && <SelectCheck fill="blue" stroke="white" />}
+                              0 && (
+                              <IconCircleCheck
+                                fill="blue"
+                                color="white"
+                                className={styles['SelectCheck']}
+                              />
+                            )}
                           {image.favorited && (
-                            <StyledHeartIcon
+                            <IconHeart
+                              className={styles['StyledHeartIcon']}
                               fill="#14B8A6"
                               width={1}
                               size={32}
-                              shadow
                             />
                           )}
                         </LinkEl>
