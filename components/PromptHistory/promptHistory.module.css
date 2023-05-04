@@ -1,0 +1,49 @@
+/* PromptsList */
+.PromptsList {
+  background-color: var(--body-color);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  top: 180px;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  position: fixed;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+}
+.PromptsList * {
+  -ms-overflow-style: none;
+}
+.PromptsList::-webkit-scrollbar {
+  display: none;
+}
+@media (min-width: 640px) {
+  .PromptsList {
+    top: 164px;
+  }
+}
+
+/* PromptWrapper */
+.PromptWrapper {
+  background-color: var(--body-color);
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+  margin-bottom: 16px;
+  border: 1px solid #7e5a6c;
+  border-radius: 4px;
+  padding: 8px;
+  position: relative;
+}
+
+/* Timestamp */
+.Timestamp {
+  color: gray;
+  font-size: 12px;
+}
+
+/* PromptText */
+.PromptText {
+  margin-right: 40px;
+}

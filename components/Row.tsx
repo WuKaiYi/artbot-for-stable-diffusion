@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import React from 'react'
 
 interface IRowProps {
@@ -7,9 +8,12 @@ interface IRowProps {
 }
 
 const Row = (props: IRowProps) => {
-  const { children, ...rest } = props
+  const { children, className, ...rest } = props
   return (
-    <div className={`flex flex-row w-full gap-[8px] items-center`} {...rest}>
+    <div
+      className={clsx(`flex flex-row w-full gap-[8px] items-center`, className)}
+      {...rest}
+    >
       {children}
     </div>
   )
