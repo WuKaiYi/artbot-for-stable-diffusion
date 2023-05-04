@@ -2,7 +2,6 @@ import Head from 'next/head'
 import React, { useCallback, useEffect, useState } from 'react'
 import Switch from 'react-switch'
 import { useStore } from 'statery'
-import styled from 'styled-components'
 import { useRouter } from 'next/router'
 
 import useComponentState from '../../hooks/useComponentState'
@@ -38,60 +37,10 @@ import AlertDialogBox from '../UI/AlertDialogBox'
 import { db, generateThumbnails } from '../../utils/db'
 import TextTooltipRow from '../UI/TextTooltipRow'
 import EyeIcon from 'components/icons/EyeIcon'
+import Section from 'components/UI/Section'
+import SubSectionTitle from 'components/UI/SubSectionTitle'
 
-const Section = styled.div`
-  padding-top: 16px;
-
-  &:first-child {
-    padding-top: 0;
-  }
-`
-
-const SubSectionTitle = styled.div`
-  padding-bottom: 8px;
-`
-
-const SettingsWrapper = styled.div`
-  width: 100%;
-
-  @media (min-width: 640px) {
-    display: flex;
-    flex-direction: row;
-  }
-`
-
-const LinksPanel = styled.div`
-  display: none;
-
-  @media (min-width: 640px) {
-    border-right: 1px solid white;
-    display: flex;
-    flex-direction: column;
-    width: 280px;
-  }
-`
-
-const LinksList = styled.ul`
-  display: flex;
-  flex-direction: column;
-  row-gap: 8px;
-`
-
-const OptionsPanel = styled.div`
-  width: 100%;
-
-  @media (min-width: 640px) {
-    display: flex;
-    flex-direction: column;
-    padding-left: 16px;
-  }
-`
-
-const ShowOnMobile = styled.div`
-  @media (min-width: 640px) {
-    display: none;
-  }
-`
+import styles from './settingsPage.module.css'
 
 const SettingsPage = () => {
   const router = useRouter()
@@ -271,7 +220,7 @@ const SettingsPage = () => {
           <PageTitle>Settings</PageTitle>
         </div>
         <div className="flex flex-row justify-end w-3/4 items-start h-[38px] relative gap-2">
-          <ShowOnMobile>
+          <div className={styles['showOnMobile']}>
             <MenuButton
               active={componentState.showOptionsMenu}
               title="Click for more settings"
@@ -352,12 +301,12 @@ const SettingsPage = () => {
                 </DropDownMenuItem>
               </DropDownMenu>
             )}
-          </ShowOnMobile>
+          </div>
         </div>
       </div>
-      <SettingsWrapper>
-        <LinksPanel>
-          <LinksList>
+      <div className={styles['settings-wrapper']}>
+        <div className={styles['links-panel']}>
+          <ul className={styles['links-list']}>
             <li>
               <Linker href="/settings" passHref>
                 Stable Horde Settings
@@ -378,9 +327,9 @@ const SettingsPage = () => {
                 Export
               </Linker>
             </li>
-          </LinksList>
-        </LinksPanel>
-        <OptionsPanel>
+          </ul>
+        </div>
+        <div className={styles['options-panel']}>
           {!router.query.panel ? (
             <>
               <Section>
@@ -1032,8 +981,8 @@ const SettingsPage = () => {
               <ImportExportPanel />
             </>
           ) : null}
-        </OptionsPanel>
-      </SettingsWrapper>
+        </div>
+      </div>
     </div>
   )
 }

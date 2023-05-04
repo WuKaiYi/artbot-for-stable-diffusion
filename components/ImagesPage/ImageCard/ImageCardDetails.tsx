@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import { useRouter } from 'next/router'
-import styled from 'styled-components'
 
 import { deleteCompletedImage } from '../../../utils/db'
 import ConfirmationModal from '../../ConfirmationModal'
@@ -18,6 +17,7 @@ import {
   uploadImg2Img
 } from '../../../controllers/imageDetailsCommon'
 import CopyIcon from '../../icons/CopyIcon'
+import styles from './imageCard.module.css'
 
 interface ImageDetails {
   jobId: string
@@ -36,12 +36,6 @@ interface ImageDetailsProps {
   imageDetails: ImageDetails
   onDelete: () => void
 }
-
-const StyledPanel = styled.div`
-  background-color: ${(props) => props.theme.cardBackground};
-  border-top: 2px solid ${(props) => props.theme.text};
-  color: ${(props) => props.theme.grayText};
-`
 
 const ImageDetails = ({
   imageDetails,
@@ -157,7 +151,7 @@ const ImageDetails = ({
   )
 
   return (
-    <StyledPanel className="text-left p-4">
+    <div className={(styles['styled-panel'], 'text-left p-4')}>
       {showDeleteModal && (
         <ConfirmationModal
           onConfirmClick={() => handleDeleteImageClick(imageDetails.jobId)}
@@ -210,7 +204,7 @@ const ImageDetails = ({
           </Button>
         </div>
       </div>
-    </StyledPanel>
+    </div>
   )
 }
 

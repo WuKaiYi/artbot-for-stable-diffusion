@@ -1,0 +1,5 @@
+.styled-panel {
+  background-color: var(--card-background);
+  border-top: 2px solid var(--text-color);
+  color: var(--text-shade);
+}

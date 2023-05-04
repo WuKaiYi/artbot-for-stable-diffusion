@@ -1,6 +1,5 @@
 import clsx from 'clsx'
 import { toast } from 'react-toastify'
-import styled from 'styled-components'
 import { fetchUserDetails } from '../../api/userInfo'
 import AppSettings from '../../models/AppSettings'
 import { setWorker } from '../../store/userStore'
@@ -15,44 +14,13 @@ import PauseIcon from '../icons/PauseIcon'
 import PlayIcon from '../icons/PlayIcon'
 import PointIcon from '../icons/PointIcon'
 import SquareIcon from '../icons/SquareIcon'
-import Row from '../Row'
 import { Button } from '../UI/Button'
+
 import styles from './workerInfo.module.css'
 
-const WorkerTitle = styled.div`
-  align-items: center;
-  column-gap: 2px;
-  display: flex;
-  flex-direction: row;
-  margin-left: -8px;
-`
-
-const WorkerId = styled.div`
-  align-items: center;
-  column-gap: 4px;
-  cursor: pointer;
-  display: flex;
-  flex-direction: row;
-  font-family: monospace;
-  font-size: 14px;
-`
-
-const WorkerStatus = styled.div`
-  font-size: 14px;
-  margin-top: 8px;
-`
-
-const Spacer = styled.div`
-  margin-bottom: 8px;
-`
-
-const ExpandModels = styled(Row)`
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  column-gap: 8px;
-  cursor: pointer;
-`
+const Spacer = () => {
+  return <div style={{ marginBottom: '8px' }}></div>
+}
 
 const WorkerInfo = ({
   forceUpdate,
@@ -121,15 +89,16 @@ const WorkerInfo = ({
       key={worker.id}
     >
       <div>
-        <WorkerTitle>
+        <div className={styles['worker-title']}>
           <a
             // @ts-ignore
             name={worker.id}
           />
           <PointIcon size={28} fill={statusColor} stroke={statusColor} />
           <strong>{worker.name}</strong>
-        </WorkerTitle>
-        <WorkerId
+        </div>
+        <div
+          className={styles['worker-id']}
           onClick={() => {
             navigator?.clipboard?.writeText(`${worker.id}`).then(() => {
               toast.success('Worker ID copied!', {
@@ -148,11 +117,11 @@ const WorkerInfo = ({
         >
           <CopyIcon />
           id: {worker.id}
-        </WorkerId>
+        </div>
         {worker.info && (
           <div className="mt-2 text-sm italic">{worker.info}</div>
         )}
-        <WorkerStatus>
+        <div className={styles['worker-status']}>
           <div>
             Status:{' '}
             <strong>
@@ -226,7 +195,7 @@ const WorkerInfo = ({
             </tbody>
           </table>
           <Spacer />
-        </WorkerStatus>
+        </div>
       </div>
 
       <div
@@ -302,10 +271,10 @@ const WorkerInfo = ({
 
       <Spacer />
 
-      <ExpandModels onClick={showModelClick}>
+      <div className={styles['expand-models']} onClick={showModelClick}>
         {showModels ? <ChevronDownIcon /> : <ChevronRightIcon />}
         Models ({worker?.models?.length ?? 0})
-      </ExpandModels>
+      </div>
     </div>
   )
 }

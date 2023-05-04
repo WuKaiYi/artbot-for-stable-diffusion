@@ -1,0 +1,47 @@
+.settings-wrapper {
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .settings-wrapper {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.links-panel {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .links-panel {
+    border-right: 1px solid white;
+    display: flex;
+    flex-direction: column;
+    width: 280px;
+  }
+}
+
+.links-list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+}
+
+.options-panel {
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .options-panel {
+    display: flex;
+    flex-direction: column;
+    padding-left: 16px;
+  }
+}
+
+@media (min-width: 640px) {
+  .showOnMobile {
+    display: none;
+  }
+}

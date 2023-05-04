@@ -1,11 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useCallback, useEffect, useState } from 'react'
-import styled from 'styled-components'
 import { useStore } from 'statery'
 import Switch from 'react-switch'
 
 // UI component imports
-import { Button } from 'components/UI/Button'
 import Checkbox from 'components/UI/Checkbox'
 import Input from 'components/UI/Input'
 import Linker from 'components/UI/Linker'
@@ -51,14 +49,20 @@ import ImageOrientationOptions from 'modules/ImageOrientationOptions'
 import SeedInput from 'modules/SeedInput'
 import SamplersDropdown from 'modules/SamplersDropdown'
 
-const NoSliderSpacer = styled.div`
-  height: 14px;
-  margin-bottom: 16px;
-`
-
 interface Props {
   input: any
   setInput: any
+}
+
+const NoSliderSpacer = () => {
+  return (
+    <div
+      style={{
+        height: '14px',
+        marginBottom: '16px'
+      }}
+    />
+  )
 }
 
 const AdvancedOptionsPanel = ({ input, setInput }: Props) => {
@@ -194,8 +198,14 @@ const AdvancedOptionsPanel = ({ input, setInput }: Props) => {
           </div>
         </Section>
       )}
-      <div className="flex flex-row items-center justify-start w-full gap-2 text-sm md:w-1/2">
-        <StylesDropdown input={input} setInput={setInput} isSearchable={true} />
+      <div className="flex flex-row items-center justify-start w-full gap-2 text-sm">
+        <MaxWidth width="480px">
+          <StylesDropdown
+            input={input}
+            setInput={setInput}
+            isSearchable={true}
+          />
+        </MaxWidth>
       </div>
       <ImageOrientationOptions input={input} setInput={setInput} />
       <SamplersDropdown input={input} setInput={setInput} />

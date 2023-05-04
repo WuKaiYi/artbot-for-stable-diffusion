@@ -1,7 +1,5 @@
-import SelectComponent from '../../UI/Select'
 import { sortedPresets, stylePresets } from '../../../utils/stylePresets'
 import { useEffect, useState } from 'react'
-import styled from 'styled-components'
 import PhotoIcon from '../../icons/PhotoIcon'
 import ArrowBarLeftIcon from '../../icons/ArrowBarLeftIcon'
 import { Button } from '../../UI/Button'
@@ -9,6 +7,7 @@ import 'react-tooltip/dist/react-tooltip.css'
 
 import TextTooltipRow from 'components/UI/TextTooltipRow'
 import TooltipComponent from 'components/UI/Tooltip'
+import Select from 'components/UI/Select'
 interface IProps {
   input: any
   setInput(obj: any): any
@@ -25,16 +24,6 @@ const presetOptions = () => {
 
   return options
 }
-
-const StyledDropdown = styled(SelectComponent)`
-  font-size: 16px;
-  width: 100%;
-
-  @media (min-width: 640px) {
-    max-width: 300px;
-    width: calc(100% - 56px);
-  }
-`
 
 const StylesDrodown = ({ input, setInput }: IProps) => {
   const [presetValue, setPresetValue] = useState({
@@ -80,7 +69,7 @@ const StylesDrodown = ({ input, setInput }: IProps) => {
         </TextTooltipRow>
       </div>
       <div className="flex flex-row items-center w-full gap-2">
-        <StyledDropdown
+        <Select
           onChange={handleSelect}
           options={presetOptions()}
           value={presetValue}

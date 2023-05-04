@@ -1,6 +1,5 @@
 import React, { useCallback } from 'react'
 import { useRouter } from 'next/router'
-import styled from 'styled-components'
 
 import { Button } from '../../UI/Button'
 import Image from '../../Image'
@@ -11,14 +10,7 @@ import PhotoUpIcon from '../../icons/PhotoUpIcon'
 import Head from 'next/head'
 import PromptInputSettings from '../../../models/PromptInputSettings'
 import { setI2iUploaded } from 'store/canvasStore'
-
-const Section = styled.div`
-  padding-top: 16px;
-
-  &:first-child {
-    padding-top: 0;
-  }
-`
+import Section from 'components/UI/Section'
 
 interface Props {
   handleChangeInput: any
