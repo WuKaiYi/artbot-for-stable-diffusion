@@ -13,6 +13,7 @@ const MenuFixed = () => {
 
   return (
     <div
+      className="hidden 2xl:block"
       style={{
         backgroundColor: 'var(--dark-shade)',
         position: 'fixed',
