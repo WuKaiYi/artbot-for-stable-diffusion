@@ -12,7 +12,7 @@
   --dark-accent: #8e7fb8;
   --dark-shade: #244975;
 
-  --card-background: #7e5a6c;
+  --card-background: #7e5a6c; /* this is equivalent to props.theme.border on original ArtBot */
 
   --sticky-footer-padding: 80px;
   --sticky-footer-margin: -80px;

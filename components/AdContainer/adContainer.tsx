@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import React, { useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 
+const ENABLED = true
 const AD_BLOCK_ID = 'carbonads'
 
 function AdContainer({
@@ -57,7 +58,7 @@ function AdContainer({
 
   const classes = ['flex', 'justify-center', `w-full`]
 
-  if (typeof window === 'undefined') {
+  if (typeof window === 'undefined' || !ENABLED) {
     return null
   }
 
