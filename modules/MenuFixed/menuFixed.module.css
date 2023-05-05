@@ -1,3 +1,19 @@
+.fixed-menu-panel {
+  background-color: var(--dark-shade);
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: var(--sidebar-width);
+}
+
+@media (min-width: 1440px) {
+  .fixed-menu-panel {
+    display: block;
+  }
+}
+
 .hide-scrollbars {
   overflow-y: auto;
   -ms-overflow-style: none; /* IE and Edge */

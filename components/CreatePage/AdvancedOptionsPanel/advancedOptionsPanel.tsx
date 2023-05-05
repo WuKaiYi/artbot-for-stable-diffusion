@@ -27,7 +27,7 @@ import ControlNetOptions from './ControlNetOptions'
 import HiresFix from './HiresFix'
 import InputSwitch from './InputSwitch'
 import NumericInputSlider from './NumericInputSlider'
-import SelectModel from './SelectModel'
+// import SelectModel from './SelectModel'
 import UpscalerOptions from './UpscalerOptions'
 
 // Store imports
@@ -48,6 +48,8 @@ import StylesDropdown from '../StylesDropdown'
 import ImageOrientationOptions from 'modules/ImageOrientationOptions'
 import SeedInput from 'modules/SeedInput'
 import SamplersDropdown from 'modules/SamplersDropdown'
+import SelectModelDetails from 'modules/SelectModelDetails'
+import SelectModel from 'modules/SelectModel'
 
 interface Props {
   input: any
@@ -198,6 +200,8 @@ const AdvancedOptionsPanel = ({ input, setInput }: Props) => {
           </div>
         </Section>
       )}
+      <SelectModel input={input} setInput={setInput} />
+      <SelectModelDetails models={input.models} />
       <div className="flex flex-row items-center justify-start w-full gap-2 text-sm">
         <MaxWidth width="480px">
           <StylesDropdown
@@ -447,7 +451,7 @@ const AdvancedOptionsPanel = ({ input, setInput }: Props) => {
         }
       />
       <SeedInput input={input} setInput={setInput} />
-      {input.source_processing !== SourceProcessing.OutPainting &&
+      {/* {input.source_processing !== SourceProcessing.OutPainting &&
         !input.useAllModels &&
         !componentState.showMultiModel &&
         !input.useFavoriteModels && (
@@ -456,7 +460,7 @@ const AdvancedOptionsPanel = ({ input, setInput }: Props) => {
             modelerOptions={modelerOptions}
             setInput={setInput}
           />
-        )}
+        )} */}
       {componentState.showMultiModel ? (
         <Section>
           <SubSectionTitle>

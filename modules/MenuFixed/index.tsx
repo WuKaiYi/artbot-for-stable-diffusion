@@ -12,17 +12,7 @@ const MenuFixed = () => {
   }
 
   return (
-    <div
-      className="hidden 2xl:block"
-      style={{
-        backgroundColor: 'var(--dark-shade)',
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        bottom: 0,
-        width: 'var(--sidebar-width)'
-      }}
-    >
+    <div className={styles['fixed-menu-panel']}>
       <div
         className={clsx(
           styles['fixed-menu-wrapper'],
