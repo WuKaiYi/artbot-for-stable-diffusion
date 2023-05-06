@@ -2,8 +2,7 @@ import { trackEvent } from 'api/telemetry'
 import { Button } from 'components/UI/Button'
 import { useCallback, useState } from 'react'
 import { db, getDefaultPrompt, setDefaultPrompt } from 'utils/db'
-import NegativePrompts from '../NegativePrompts'
-import PromptTextArea from 'modules/PromptTextArea'
+import BasePromptTextArea from 'modules/BasePromptTextArea'
 import {
   IconDeviceFloppy,
   IconFolder,
@@ -12,8 +11,9 @@ import {
 import isMobile from 'is-mobile'
 import Tooltip from 'components/Tooltip'
 import PromptInputSettings from 'models/PromptInputSettings'
+import NegativePrompts from 'components/CreatePage/NegativePrompts'
 
-const NegativePrompt = ({ input, setInput }: any) => {
+const NegativePromptArea = ({ input, setInput }: any) => {
   const [negativePromptLibraryPanelOpen, setNegativePromptLibraryPanelOpen] =
     useState(false)
 
@@ -54,7 +54,7 @@ const NegativePrompt = ({ input, setInput }: any) => {
         />
       )}
       <div className="flex flex-col gap-1">
-        <PromptTextArea
+        <BasePromptTextArea
           handleChangeValue={(e) => {
             setInput({ negative: e.target.value })
           }}
@@ -105,4 +105,4 @@ const NegativePrompt = ({ input, setInput }: any) => {
   )
 }
 
-export default NegativePrompt
+export default NegativePromptArea

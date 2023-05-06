@@ -240,6 +240,48 @@ export interface IOrientation {
   height?: number
 }
 
+export interface PromptInput {
+  canvasData: any | null
+  cfg_scale: number
+  clipskip: number
+  control_type: string
+  denoising_strength: number
+  facefixer_strength: number
+  height: number
+  hires: boolean
+  image_is_control: boolean
+  imageType: string
+  img2img: boolean
+  karras: boolean
+  maskData: any | null
+  models: Array<string>
+  multiGuidance: string
+  multiSteps: string
+  negative: string
+  numImages: number
+  orientationType: string
+  parentJobId: string
+  post_processing: Array<string>
+  prompt: string
+  return_control_map: boolean
+  sampler: string
+  seed: string
+  source_image: string
+  source_mask: string
+  source_processing: SourceProcessing
+  steps: number
+  stylePreset: string
+  tiling: boolean
+  triggers: Array<string>
+  upscaled: boolean
+  useAllModels: boolean
+  useAllSamplers: boolean
+  useFavoriteModels: boolean
+  useMultiGuidance: boolean
+  useMultiSteps: boolean
+  width: number
+}
+
 export enum PromptTypes {
   DefaultNegative = 'defaultNegative',
   Negative = 'negative',
@@ -258,4 +300,9 @@ export enum ControlTypes {
   Scribble = 'scribble',
   FakeScribbles = 'fakescribbles',
   Hough = 'hough'
+}
+
+export interface Value {
+  value: string | boolean
+  label: string
 }

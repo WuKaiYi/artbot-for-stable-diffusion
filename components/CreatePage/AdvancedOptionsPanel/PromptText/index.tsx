@@ -5,7 +5,7 @@ import { Button } from 'components/UI/Button'
 import InteractiveModal from 'components/UI/InteractiveModal/interactiveModal'
 import isMobile from 'is-mobile'
 import PromptInputSettings from 'models/PromptInputSettings'
-import PromptTextArea from 'modules/PromptTextArea'
+import BasePromptTextArea from 'modules/BasePromptTextArea'
 import { useState } from 'react'
 
 const PromptText = ({ input, setInput }: any) => {
@@ -21,7 +21,7 @@ const PromptText = ({ input, setInput }: any) => {
           />
         </InteractiveModal>
       )}
-      <PromptTextArea
+      <BasePromptTextArea
         handleChangeValue={(e) => {
           setInput({ prompt: e.target.value })
         }}
