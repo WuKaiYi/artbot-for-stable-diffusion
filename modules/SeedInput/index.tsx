@@ -23,7 +23,7 @@ const SeedInput = ({ input, setInput }: GetSetPromptInput) => {
         </Tooltip>
         <TooltipIcon id={`seed-tooltip`} />
       </SubSectionTitle>
-      <MaxWidth width="240px">
+      <MaxWidth width="320px">
         <div className="flex flex-row gap-2">
           <Input
             className="mb-2"

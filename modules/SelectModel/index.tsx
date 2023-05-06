@@ -21,7 +21,7 @@ const SelectModel = ({ input, setInput }: GetSetPromptInput) => {
         </TooltipComponent>
         <TooltipIcon id={`select-models-tooltip`} />
       </SubSectionTitle>
-      <MaxWidth width="320px">
+      <MaxWidth width="480px">
         <Select
           options={modelsOptions}
           onChange={(obj: any) => setInput({ models: [obj.value] })}

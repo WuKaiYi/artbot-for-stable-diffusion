@@ -5,11 +5,13 @@ import clsx from 'clsx'
 const Section = ({
   first = false,
   children,
-  className
+  className,
+  style = {}
 }: {
   first?: boolean
   children?: React.ReactNode
   className?: string
+  style?: object
 }) => {
   return (
     <div
@@ -18,6 +20,7 @@ const Section = ({
         [styles['section-first']]: first,
         className
       })}
+      style={{ ...style }}
     >
       {children}
     </div>

@@ -1,7 +1,4 @@
 .section {
-  padding-top: 16px;
-}
-
-.section-first {
-  padding-top: 0;
+  color: var(--dark-shade);
+  padding-bottom: 8px;
 }

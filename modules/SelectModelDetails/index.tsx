@@ -18,7 +18,7 @@ const SelectModelDetails = ({ models }: { models: Array<string> }) => {
 
   return (
     <Section>
-      <MaxWidth width="320px">
+      <MaxWidth width="480px">
         <div
           style={{
             border: '1px solid rgb(126, 90, 108)',

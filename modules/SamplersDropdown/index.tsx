@@ -6,6 +6,7 @@ import Section from 'components/UI/Section'
 import Select from 'components/UI/Select'
 import SubSectionTitle from 'components/UI/SubSectionTitle'
 import Samplers from 'controllers/Samplers'
+import PromptInputSettings from 'models/PromptInputSettings'
 import ReactSwitch from 'react-switch'
 import { GetSetPromptInput } from 'types'
 import { SourceProcessing } from 'utils/promptUtils'
@@ -29,8 +30,8 @@ const SamplersDropdown = ({
     !showMultiModel &&
     !hideShowAllSamplers
 
-  if (!showAllSamplersInput) {
-    return (
+  return (
+    <>
       <Section>
         <SubSectionTitle>Sampler</SubSectionTitle>
         {(input.source_processing === SourceProcessing.InPainting &&
@@ -40,7 +41,7 @@ const SamplersDropdown = ({
             Note: Sampler disabled when controlnet or inpainting model is used.
           </div>
         ) : (
-          <MaxWidth width="240px">
+          <MaxWidth width="480px">
             <Select
               options={Samplers.dropdownOptions({
                 model: input.models[0],
@@ -55,52 +56,49 @@ const SamplersDropdown = ({
           </MaxWidth>
         )}
       </Section>
-    )
-  }
-
-  if (showAllSamplersInput) {
-    return (
-      <Section>
-        <SubSectionTitle>
-          Use all samplers
-          <Tooltip targetId={`use-all-samplers-tooltip`}>
-            Automatically generate an image for each sampler available.
-          </Tooltip>
-          <TooltipIcon id={`use-all-samplers-tooltip`} />
-        </SubSectionTitle>
-        <ReactSwitch
-          disabled={
-            input.useMultiGuidance || input.useMultiSteps ? true : false
-          }
-          onChange={() => {
-            if (!input.useAllSamplers) {
-              trackEvent({
-                event: 'USE_ALL_SAMPLERS_CLICK',
-                context: '/pages/index'
-              })
-              setInput({
-                numImages: 1,
-                useAllSamplers: true,
-                useAllModels: false,
-                useFavoriteModels: false,
-                useMultiSteps: false
-              })
-
-              PromptInputSettings.set('numImages', 1)
-              PromptInputSettings.set('useAllSamplers', true)
-              PromptInputSettings.set('useAllModels', false)
-              PromptInputSettings.set('useFavoriteModels', false)
-              PromptInputSettings.set('useMultiSteps', false)
-            } else {
-              PromptInputSettings.set('useAllSamplers', false)
-              setInput({ useAllSamplers: false })
+      {showAllSamplersInput && (
+        <Section>
+          <SubSectionTitle>
+            Use all samplers
+            <Tooltip targetId={`use-all-samplers-tooltip`}>
+              Automatically generate an image for each sampler available.
+            </Tooltip>
+            <TooltipIcon id={`use-all-samplers-tooltip`} />
+          </SubSectionTitle>
+          <ReactSwitch
+            disabled={
+              input.useMultiGuidance || input.useMultiSteps ? true : false
             }
-          }}
-          checked={input.useAllSamplers}
-        />
-      </Section>
-    )
-  }
+            onChange={() => {
+              if (!input.useAllSamplers) {
+                trackEvent({
+                  event: 'USE_ALL_SAMPLERS_CLICK',
+                  context: '/pages/index'
+                })
+                setInput({
+                  numImages: 1,
+                  useAllSamplers: true,
+                  useAllModels: false,
+                  useFavoriteModels: false,
+                  useMultiSteps: false
+                })
+
+                PromptInputSettings.set('numImages', 1)
+                PromptInputSettings.set('useAllSamplers', true)
+                PromptInputSettings.set('useAllModels', false)
+                PromptInputSettings.set('useFavoriteModels', false)
+                PromptInputSettings.set('useMultiSteps', false)
+              } else {
+                PromptInputSettings.set('useAllSamplers', false)
+                setInput({ useAllSamplers: false })
+              }
+            }}
+            checked={input.useAllSamplers}
+          />
+        </Section>
+      )}
+    </>
+  )
 }
 
 export default SamplersDropdown
