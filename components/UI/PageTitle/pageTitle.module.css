@@ -1,0 +1,17 @@
+.PageTitle {
+  color: var(--dark-shade);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+@media (min-width: 640px) {
+  .PageTitle {
+    font-size: 24px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .PageTitle {
+    color: var(--light-shade);
+  }
+}

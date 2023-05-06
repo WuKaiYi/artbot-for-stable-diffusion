@@ -72,6 +72,7 @@ export default function Toast({
   })
 
   const isActive =
+    // @ts-ignore
     jobId && imageDetails && imageDetails.base64String && showImageReadyToast
 
   if (!isActive || AppSettings.get('disableNewImageNotification')) {
@@ -93,7 +94,11 @@ export default function Toast({
               href={`/image/${jobId}`}
               onClick={handleClick}
             >
-              <ImageSquare imageDetails={imageDetails} size={80} />
+              <ImageSquare
+                // @ts-ignore
+                imageDetails={imageDetails}
+                size={80}
+              />
             </Linker>
           </div>
           <div className={styles['StyledTextPanel']}>

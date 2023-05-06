@@ -271,7 +271,19 @@ const ImagesPage = () => {
 
   let imageColumns = 2
   // @ts-ignore
-  if (size?.width > 1280) {
+  if (size?.width > 3000) {
+    imageColumns = 9
+    // @ts-ignore
+  } else if (size?.width > 2700) {
+    imageColumns = 8
+    // @ts-ignore
+  } else if (size?.width > 2400) {
+    imageColumns = 7
+    // @ts-ignore
+  } else if (size?.width > 1440) {
+    imageColumns = 6
+    // @ts-ignore
+  } else if (size?.width > 1280) {
     imageColumns = 4
     // @ts-ignore
   } else if (size?.width > 800) {
