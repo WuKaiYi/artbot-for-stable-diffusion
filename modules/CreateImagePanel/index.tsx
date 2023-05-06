@@ -10,6 +10,9 @@ import ImageOrientationOptions from 'modules/ImageOrientationOptions'
 import SamplersDropdown from 'modules/SamplersDropdown'
 import NumericInputSlider from 'components/CreatePage/AdvancedOptionsPanel/NumericInputSlider'
 import SeedInput from 'modules/SeedInput'
+import PostProcessors from 'modules/PostProcessors'
+import UpscalerOptions from 'modules/UpscaleOptions'
+import { MAX_IMAGES_PER_JOB } from '_constants'
 
 const CreateImagePanel = ({ input, setInput }: GetSetPromptInput) => {
   const handleChangeValue = (event: InputEvent) => {
@@ -84,6 +87,38 @@ const CreateImagePanel = ({ input, setInput }: GetSetPromptInput) => {
         </Section>
         <Section>
           <SeedInput input={input} setInput={setInput} />
+        </Section>
+        <Section>
+          <PostProcessors input={input} setInput={setInput} />
+        </Section>
+        <Section>
+          <UpscalerOptions input={input} setInput={setInput} />
+        </Section>
+        <Section>
+          <NumericInputSlider
+            label="CLIP skip"
+            tooltip="Determine how early to stop processing a prompt using CLIP. Higher
+          values stop processing earlier. Default is 1 (no skip)."
+            from={1}
+            to={12}
+            step={1}
+            input={input}
+            setInput={setInput}
+            fieldName="clipskip"
+            enforceStepValue
+          />
+        </Section>
+        <Section>
+          <NumericInputSlider
+            label="# of images"
+            from={1}
+            to={MAX_IMAGES_PER_JOB}
+            step={1}
+            input={input}
+            setInput={setInput}
+            fieldName="numImages"
+            enforceStepValue
+          />
         </Section>
       </div>
     </div>

@@ -83,18 +83,18 @@ const NegativePromptArea = ({ input, setInput }: any) => {
           </Tooltip>
           <Button
             id="negative-save-tooltip"
-            className="w-[120px]"
             size="small"
             onClick={handleSaveNeg}
+            width="100px"
           >
             <IconDeviceFloppy stroke={1.5} />
             Save
           </Button>
           <Button
             id="negative-load-tooltip"
-            className="w-[120px]"
             size="small"
             onClick={() => setNegativePromptLibraryPanelOpen(true)}
+            width="100px"
           >
             <IconFolder stroke={1.5} />
             Load

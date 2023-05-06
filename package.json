@@ -38,6 +38,7 @@
   "dependencies": {
     "@next/bundle-analyzer": "13.4.1",
     "@radix-ui/colors": "0.1.8",
+    "@radix-ui/react-checkbox": "1.0.3",
     "@radix-ui/react-navigation-menu": "1.1.1",
     "@szhsin/react-menu": "3.4.1",
     "@tabler/icons-react": "2.17.0",

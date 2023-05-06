@@ -13,7 +13,7 @@ interface ButtonProps {
   theme?: string
   title?: string
   width?: string
-  style?: any
+  style?: object
 }
 
 export function Button(props: ButtonProps) {
@@ -25,8 +25,18 @@ export function Button(props: ButtonProps) {
     onClick = () => {},
     size,
     theme,
+    style = {},
+    width,
     ...rest
   } = props
+
+  const s = { ...style }
+
+  if (width) {
+    // @ts-ignore
+    s.width = width
+  }
+
   return (
     <button
       id={id}
@@ -44,6 +54,7 @@ export function Button(props: ButtonProps) {
         if (disabled) return
         onClick()
       }}
+      style={{ ...s }}
       {...rest}
     >
       {children}

@@ -27,7 +27,7 @@ const BasePromptTextArea = ({
   const flexRowClasses = ['align-start', 'w-full', 'flex', 'flex-row', 'gap-2']
 
   return (
-    <div className="mb-2">
+    <div className="mb-1">
       <div className="flex flex-row items-center gap-2 mt-0 mb-1 text-sm font-bold text-white">
         {label}
       </div>

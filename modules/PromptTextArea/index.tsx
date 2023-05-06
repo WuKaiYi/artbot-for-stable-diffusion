@@ -1,4 +1,4 @@
-import { IconBook, IconPlaylistAdd } from '@tabler/icons-react'
+import { IconBook, IconPlaylistAdd, IconTags } from '@tabler/icons-react'
 import PromptHistory from 'components/PromptHistory'
 import Tooltip from 'components/Tooltip'
 import { Button } from 'components/UI/Button'
@@ -13,7 +13,7 @@ const PromptTextArea = ({ input, setInput }: GetSetPromptInput) => {
   const [showPromptHistory, setShowPromptHistory] = useState(false)
 
   return (
-    <>
+    <div className="mb-1">
       {showPromptHistory && (
         <InteractiveModal handleClose={() => setShowPromptHistory(false)}>
           <PromptHistory
@@ -61,7 +61,18 @@ const PromptTextArea = ({ input, setInput }: GetSetPromptInput) => {
         }
         value={input.prompt}
       />
-    </>
+      <div className="flex flex-row gap-2">
+        <Button
+          id="negative-save-tooltip"
+          size="small"
+          onClick={() => {}}
+          width="120px"
+        >
+          <IconTags stroke={1.5} />
+          Style tags
+        </Button>
+      </div>
+    </div>
   )
 }
 
