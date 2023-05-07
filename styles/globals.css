@@ -73,8 +73,8 @@ a {
 
 @media (min-width: 1440px) {
   .main-content {
-    margin-left: var(--sidebar-width);
-    width: calc(100% - var(--sidebar-width));
+    margin-left: calc(var(--sidebar-width) + 8px);
+    width: calc(100% - var(--sidebar-width) - 16px);
   }
 }
 

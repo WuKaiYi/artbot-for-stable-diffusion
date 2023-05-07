@@ -45,12 +45,13 @@ const ActionPanel = ({
       <FormErrorMessage errors={errors} />
 
       <div className="flex flex-col items-start justify-end w-full gap-2 mt-2 mb-4 md:flex-row">
-        <div className="flex flex-col justify-start w-full gap-2 md:w-1/2">
+        <div className="flex flex-col justify-start w-full gap-2">
           <div className="flex flex-row justify-end gap-2 sm:mt-0">
             <Button
               title="Clear current input"
               theme="secondary"
               onClick={resetInput}
+              width="120px"
             >
               <span>
                 <TrashIcon />
@@ -62,7 +63,7 @@ const ActionPanel = ({
               onClick={handleSubmit}
               // @ts-ignore
               disabled={disableSubmit || pending || areThereCriticalErrors()}
-              width="100px"
+              width="120px"
             >
               <span>{pending ? '' : <SquarePlusIcon />}</span>
               {pending ? 'Creating...' : 'Create'}

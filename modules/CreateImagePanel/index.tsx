@@ -15,7 +15,15 @@ import UpscalerOptions from 'modules/UpscaleOptions'
 import { MAX_IMAGES_PER_JOB } from '_constants'
 import ActionPanel from 'components/CreatePage/ActionPanel'
 
-const CreateImagePanel = ({ input, setInput }: GetSetPromptInput) => {
+interface CreateImagePanelProps extends GetSetPromptInput {
+  className: string
+}
+
+const CreateImagePanel = ({
+  className = '',
+  input,
+  setInput
+}: CreateImagePanelProps) => {
   const handleChangeValue = (event: InputEvent) => {
     const inputName = event.target.name
     const inputValue = event.target.value
@@ -24,7 +32,7 @@ const CreateImagePanel = ({ input, setInput }: GetSetPromptInput) => {
   }
 
   return (
-    <div className={styles['CreateImagePanel']}>
+    <div className={className}>
       <Section style={{ paddingBottom: '16px' }}>
         <div
           className="flex flex-col w-full gap-2 rounded"

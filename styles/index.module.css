@@ -1,9 +1,24 @@
-.model-trigger-btn {
-  align-items: center;
-  color: #14b8a6;
-  cursor: pointer;
+.CreateImagePanel {
   display: flex;
-  flex-direction: row;
-  margin-bottom: 4px;
-  position: relative;
+  flex-direction: column;
+  width: 100%;
+}
+
+.PendingImagesPanel {
+  display: none;
+  flex-direction: column;
+  width: 100%;
+  font-size: 18px;
+}
+
+@media (min-width: 1142px) {
+  .CreateImagePanel {
+    max-width: 640px;
+    width: 50%;
+  }
+
+  .PendingImagesPanel {
+    display: flex;
+    width: 100%;
+  }
 }
