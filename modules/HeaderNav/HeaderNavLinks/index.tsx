@@ -261,7 +261,7 @@ const HeaderNavLinks = () => {
                 stroke="white"
               />
             )}
-            <IconDeviceDesktopAnalytics size={32} stroke={1.5} />
+            <IconDeviceDesktopAnalytics size={32} stroke={1.0} />
           </NavigationMenu.Trigger>
           <NavigationMenu.Content className={styles.NavigationMenuContent}>
             <HordePerformanceDropdown />

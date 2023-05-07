@@ -1,9 +1,4 @@
-import {
-  IconBook,
-  IconCamera,
-  IconPlaylistAdd,
-  IconTags
-} from '@tabler/icons-react'
+import { IconBook, IconCamera, IconPlaylistAdd } from '@tabler/icons-react'
 import PromptHistory from 'components/PromptHistory'
 import Tooltip from 'components/Tooltip'
 import { Button } from 'components/UI/Button'
@@ -11,6 +6,8 @@ import InteractiveModal from 'components/UI/InteractiveModal/interactiveModal'
 import isMobile from 'is-mobile'
 import PromptInputSettings from 'models/PromptInputSettings'
 import BasePromptTextArea from 'modules/BasePromptTextArea'
+import StylePresetsDropdown from 'modules/StylePresetsDropdown'
+import StyleTagsDropdown from 'modules/StyleTagsDropdown'
 import { useState } from 'react'
 import { GetSetPromptInput } from 'types'
 
@@ -66,7 +63,7 @@ const PromptTextArea = ({ input, setInput }: GetSetPromptInput) => {
         }
         value={input.prompt}
       />
-      <div className="flex flex-row gap-2">
+      <div className="flex flex-row gap-2 relative">
         <Tooltip disabled={isMobile()} targetId="style-tag-tooltip">
           Helpful list of styles, artists, and photography methods to add to
           your prompt.
@@ -76,24 +73,8 @@ const PromptTextArea = ({ input, setInput }: GetSetPromptInput) => {
           and add relevant prompt and negative prompt parameters when 67
           submitted to the Stable Horde API.
         </Tooltip>
-        <Button
-          id="style-tag-tooltip"
-          size="small"
-          onClick={() => {}}
-          width="120px"
-        >
-          <IconTags stroke={1.5} />
-          Style tags
-        </Button>
-        <Button
-          id="style-preset-tooltip"
-          size="small"
-          onClick={() => {}}
-          width="130px"
-        >
-          <IconCamera stroke={1.5} />
-          Style presets
-        </Button>
+        <StyleTagsDropdown input={input} setInput={setInput} />
+        <StylePresetsDropdown input={input} setInput={setInput} />
       </div>
     </div>
   )

@@ -83,5 +83,6 @@ export const zIndex = {
   OVER_BASE: 2, // e.g., Makes <Select /> menu dropdown appear above other select components
   NAV_BAR: 25,
   MODAL: 3,
-  SLIDING_PANEL: 4
+  SLIDING_PANEL: 4,
+  OVERLAY: 30
 }
