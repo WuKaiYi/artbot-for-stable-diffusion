@@ -1,4 +1,9 @@
-import { IconBook, IconPlaylistAdd, IconTags } from '@tabler/icons-react'
+import {
+  IconBook,
+  IconCamera,
+  IconPlaylistAdd,
+  IconTags
+} from '@tabler/icons-react'
 import PromptHistory from 'components/PromptHistory'
 import Tooltip from 'components/Tooltip'
 import { Button } from 'components/UI/Button'
@@ -62,14 +67,32 @@ const PromptTextArea = ({ input, setInput }: GetSetPromptInput) => {
         value={input.prompt}
       />
       <div className="flex flex-row gap-2">
+        <Tooltip disabled={isMobile()} targetId="style-tag-tooltip">
+          Helpful list of styles, artists, and photography methods to add to
+          your prompt.
+        </Tooltip>
+        <Tooltip disabled={isMobile()} targetId="style-preset-tooltip">
+          Predefined community styles that will automatically select a model 66
+          and add relevant prompt and negative prompt parameters when 67
+          submitted to the Stable Horde API.
+        </Tooltip>
         <Button
-          id="negative-save-tooltip"
+          id="style-tag-tooltip"
           size="small"
           onClick={() => {}}
           width="120px"
         >
           <IconTags stroke={1.5} />
           Style tags
+        </Button>
+        <Button
+          id="style-preset-tooltip"
+          size="small"
+          onClick={() => {}}
+          width="130px"
+        >
+          <IconCamera stroke={1.5} />
+          Style presets
         </Button>
       </div>
     </div>

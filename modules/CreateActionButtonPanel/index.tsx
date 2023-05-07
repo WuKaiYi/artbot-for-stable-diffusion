@@ -21,7 +21,7 @@ interface Props {
   showStylesDropdown?: boolean
 }
 
-const ActionPanel = ({
+const CreateActionButtonPanel = ({
   disableSubmit = false,
   errors,
   resetInput,
@@ -99,4 +99,4 @@ const ActionPanel = ({
   )
 }
 
-export default ActionPanel
+export default CreateActionButtonPanel

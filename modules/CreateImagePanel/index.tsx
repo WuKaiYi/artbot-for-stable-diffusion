@@ -13,7 +13,7 @@ import SeedInput from 'modules/SeedInput'
 import PostProcessors from 'modules/PostProcessors'
 import UpscalerOptions from 'modules/UpscaleOptions'
 import { MAX_IMAGES_PER_JOB } from '_constants'
-import ActionPanel from 'components/CreatePage/ActionPanel'
+import ActionPanel from 'modules/CreateActionButtonPanel'
 
 interface CreateImagePanelProps extends GetSetPromptInput {
   className: string
