@@ -45,7 +45,7 @@ const NegativePromptArea = ({ input, setInput }: any) => {
     } catch (err) {}
   }, [input.negative])
   return (
-    <>
+    <div className="flex flex-col gap-0">
       {negativePromptLibraryPanelOpen && (
         <NegativePrompts
           open={negativePromptLibraryPanelOpen}
@@ -53,7 +53,7 @@ const NegativePromptArea = ({ input, setInput }: any) => {
           setInput={setInput}
         />
       )}
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col">
         <BasePromptTextArea
           handleChangeValue={(e) => {
             setInput({ negative: e.target.value })
@@ -101,7 +101,7 @@ const NegativePromptArea = ({ input, setInput }: any) => {
           </Button>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

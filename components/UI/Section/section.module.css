@@ -2,3 +2,9 @@
   color: var(--dark-shade);
   padding-bottom: 8px;
 }
+
+@media (prefers-color-scheme: dark) {
+  .section {
+    color: var(--light-shade);
+  }
+}

@@ -15,11 +15,13 @@ const Section = ({
 }) => {
   return (
     <div
-      className={clsx({
-        [styles['section']]: !first,
-        [styles['section-first']]: first,
+      className={clsx(
+        {
+          [styles['section']]: !first,
+          [styles['section-first']]: first
+        },
         className
-      })}
+      )}
       style={{ ...style }}
     >
       {children}

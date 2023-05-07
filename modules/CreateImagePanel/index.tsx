@@ -13,6 +13,7 @@ import SeedInput from 'modules/SeedInput'
 import PostProcessors from 'modules/PostProcessors'
 import UpscalerOptions from 'modules/UpscaleOptions'
 import { MAX_IMAGES_PER_JOB } from '_constants'
+import ActionPanel from 'components/CreatePage/ActionPanel'
 
 const CreateImagePanel = ({ input, setInput }: GetSetPromptInput) => {
   const handleChangeValue = (event: InputEvent) => {
@@ -36,6 +37,21 @@ const CreateImagePanel = ({ input, setInput }: GetSetPromptInput) => {
           <PromptTextArea input={input} setInput={setInput} />
           <NegativePromptArea input={input} setInput={setInput} />
         </div>
+      </Section>
+      <Section className={styles['action-panel-wrapper']}>
+        <ActionPanel
+        // errors={errors}
+        // input={input}
+        // setInput={setInput}
+        // resetInput={resetInput}
+        // handleSubmit={handleSubmit}
+        // pending={pending}
+        // totalImagesRequested={totalImagesRequested}
+        // loggedIn={loggedIn}
+        // totalKudosCost={totalKudosCost}
+        // kudosPerImage={kudosPerImage}
+        // showStylesDropdown
+        />
       </Section>
       <div className="flex flex-col">
         <Section>
