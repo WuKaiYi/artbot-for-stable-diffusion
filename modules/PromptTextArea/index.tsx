@@ -1,4 +1,4 @@
-import { IconBook, IconCamera, IconPlaylistAdd } from '@tabler/icons-react'
+import { IconBook, IconPlaylistAdd } from '@tabler/icons-react'
 import PromptHistory from 'components/PromptHistory'
 import Tooltip from 'components/Tooltip'
 import { Button } from 'components/UI/Button'

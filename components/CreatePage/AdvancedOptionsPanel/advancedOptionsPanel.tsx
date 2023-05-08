@@ -27,7 +27,8 @@ import ControlNetOptions from './ControlNetOptions'
 import HiresFix from './HiresFix'
 import InputSwitch from './InputSwitch'
 import NumericInputSlider from './NumericInputSlider'
-// import SelectModel from './SelectModel'
+import Samplers from './Samplers'
+import SelectModel from './SelectModel'
 import UpscalerOptions from './UpscalerOptions'
 
 // Store imports
@@ -44,12 +45,12 @@ import PromptInputSettings from 'models/PromptInputSettings'
 import { trackEvent } from 'api/telemetry'
 import { MAX_IMAGES_PER_JOB } from '_constants'
 import RenderParentImage from 'components/ParentImage'
-import StylesDropdown from '../StylesDropdown'
 import ImageOrientationOptions from 'modules/ImageOrientationOptions'
-import SeedInput from 'modules/SeedInput'
-import SamplersDropdown from 'modules/SamplersDropdown'
-import SelectModelDetails from 'modules/SelectModelDetails'
-import SelectModel from 'modules/SelectModel'
+
+const NoSliderSpacer = styled.div`
+  height: 14px;
+  margin-bottom: 16px;
+`
 
 interface Props {
   input: any
@@ -200,20 +201,12 @@ const AdvancedOptionsPanel = ({ input, setInput }: Props) => {
           </div>
         </Section>
       )}
-      <SelectModel input={input} setInput={setInput} />
-      <SelectModelDetails models={input.models} />
-      <div className="flex flex-row items-center justify-start w-full gap-2 text-sm">
-        <MaxWidth width="480px">
-          <StylesDropdown
-            input={input}
-            setInput={setInput}
-            isSearchable={true}
-          />
-        </MaxWidth>
-      </div>
       <ImageOrientationOptions input={input} setInput={setInput} />
-      <SamplersDropdown input={input} setInput={setInput} />
-      {/* <Samplers showMultiModel={componentState.showMultiModel} /> */}
+      <Samplers
+        input={input}
+        setInput={setInput}
+        showMultiModel={componentState.showMultiModel}
+      />
       <TwoPanel className="mt-4">
         <SplitPanel>
           {!input.useMultiSteps && (
@@ -450,8 +443,56 @@ const AdvancedOptionsPanel = ({ input, setInput }: Props) => {
           ) : null
         }
       />
-      <SeedInput input={input} setInput={setInput} />
-      {/* {input.source_processing !== SourceProcessing.OutPainting &&
+      <Section>
+        <SubSectionTitle>
+          <TextTooltipRow>
+            Seed
+            <Tooltip tooltipId="seed-tooltip">
+              Leave seed blank for random.
+            </Tooltip>
+          </TextTooltipRow>
+        </SubSectionTitle>
+        <MaxWidth
+          // @ts-ignore
+          width="240px"
+        >
+          <div className="flex flex-row gap-2">
+            <Input
+              // @ts-ignore
+              className="mb-2"
+              type="text"
+              name="seed"
+              onChange={handleChangeInput}
+              // @ts-ignore
+              value={input.seed}
+              width="100%"
+            />
+            <Button
+              title="Insert random seed"
+              onClick={() => {
+                const value = Math.abs((Math.random() * 2 ** 32) | 0)
+                if (AppSettings.get('saveSeedOnCreate')) {
+                  PromptInputSettings.set('seed', value)
+                }
+                setInput({ seed: value })
+              }}
+            >
+              <GrainIcon />
+            </Button>
+            <Button
+              theme="secondary"
+              title="Clear"
+              onClick={() => {
+                PromptInputSettings.set('seed', '')
+                setInput({ seed: '' })
+              }}
+            >
+              <ArrowBarLeftIcon />
+            </Button>
+          </div>
+        </MaxWidth>
+      </Section>
+      {input.source_processing !== SourceProcessing.OutPainting &&
         !input.useAllModels &&
         !componentState.showMultiModel &&
         !input.useFavoriteModels && (
@@ -478,7 +519,10 @@ const AdvancedOptionsPanel = ({ input, setInput }: Props) => {
               </Linker>
             </div>
           </SubSectionTitle>
-          <MaxWidth width="480px">
+          <MaxWidth
+            // @ts-ignore
+            width="480px"
+          >
             <SelectComponent
               isMulti
               menuPlacement={'top'}
@@ -707,6 +751,7 @@ const AdvancedOptionsPanel = ({ input, setInput }: Props) => {
           input={input}
           setInput={setInput}
           fieldName="clipskip"
+          fullWidth
           enforceStepValue
         />
       </Section>
@@ -720,6 +765,7 @@ const AdvancedOptionsPanel = ({ input, setInput }: Props) => {
             input={input}
             setInput={setInput}
             fieldName="numImages"
+            fullWidth
             enforceStepValue
           />
         </Section>

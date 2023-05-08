@@ -274,7 +274,7 @@ const WorkerInfo = ({
       <div className={styles['expand-models']} onClick={showModelClick}>
         {showModels ? <ChevronDownIcon /> : <ChevronRightIcon />}
         Models ({worker?.models?.length ?? 0})
-      </div>
+      </ExpandModels>
     </div>
   )
 }

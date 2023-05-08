@@ -1,6 +1,16 @@
 // Via: https://github.com/db0/Stable-Horde-Styles
 // TODO: Automatically import and update
-export const stylePresets = {
+interface Preset {
+  [key: string]: {
+    prompt: string
+    model?: string
+    sampler_name?: string
+    width?: number
+    height?: number
+  }
+}
+
+export const stylePresets: Preset = {
   raw: {
     prompt: '{p}{np}',
     model: 'stable_diffusion'

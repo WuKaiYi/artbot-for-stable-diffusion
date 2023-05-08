@@ -17,22 +17,26 @@ const StylePresetsDropdown = ({ input, setInput }: GetSetPromptInput) => {
     negative = negative.replace('{np}', '')
     negative = `${negative} ${input.negative}`
 
-    const models = stylePresets[key].model
-      ? [stylePresets[key].model]
-      : input.models
-
     const updateInput = {
       prompt: positive,
       negative,
-      models
+      models: stylePresets[key].model
+        ? [stylePresets[key].model]
+        : input.models,
+      orientationType: input.orientationType,
+      height: input.height,
+      width: input.width
     }
 
-    if (stylePresets[key].width || stylePresets[key].height) {
+    if (stylePresets[key].width && stylePresets[key].height) {
       updateInput.orientationType = 'custom'
+      // @ts-ignore
       updateInput.height = stylePresets[key].height
+      // @ts-ignore
       updateInput.width = stylePresets[key].width
     }
 
+    // @ts-ignore
     setInput({
       ...updateInput
     })
@@ -45,21 +49,25 @@ const StylePresetsDropdown = ({ input, setInput }: GetSetPromptInput) => {
     const p = input.prompt ? input.prompt : '[no prompt set]'
     const np = input.negative ? input.negative : ''
 
-    for (const [key] of Object.entries(stylePresets)) {
-      let modify = stylePresets[key].prompt.replace('{p}', p)
+    for (const [key, presetDetails] of Object.entries(stylePresets)) {
+      let modify = presetDetails.prompt.replace('{p}', p)
       modify = modify.replace('{np}', np)
 
       arr.push(
-        <div className={styles['preset-wrapper']}>
+        <div className={styles['preset-wrapper']} key={`style_${key}`}>
           <div>
             <strong>{key}</strong>
             {` / `}
-            <span className="text-xs">{stylePresets[key].model}</span>
+            <span className="text-xs">{presetDetails.model}</span>
           </div>
           <div className="flex flex-row w-full justify-between">
             <div className={styles['preset-description']}>{modify}</div>
-            <div style={{ marginLeft: '8px', width: '64px' }}>
-              <Button size="small" onClick={() => handleUsePreset(key)}>
+            <div style={{ marginLeft: '8px', width: '72px' }}>
+              <Button
+                size="small"
+                onClick={() => handleUsePreset(key)}
+                width="72px"
+              >
                 <IconPlayerPlayFilled stroke={1.5} />
                 Use
               </Button>

@@ -37,8 +37,7 @@ import AlertDialogBox from '../UI/AlertDialogBox'
 import { db, generateThumbnails } from '../../utils/db'
 import TextTooltipRow from '../UI/TextTooltipRow'
 import EyeIcon from 'components/icons/EyeIcon'
-import Section from 'components/UI/Section'
-import SubSectionTitle from 'components/UI/SubSectionTitle'
+import styles from './settings.module.css'
 
 import styles from './settingsPage.module.css'
 
@@ -47,7 +46,17 @@ const SettingsPage = () => {
   const appStore = useStore(appInfoStore)
   const userStore = useStore(userInfoStore)
 
-  const { worker_ids, workers } = userStore
+  const userState = useStore(userInfoStore)
+  const {
+    kudos_details,
+    loggedIn,
+    username,
+    kudos,
+    records = {},
+    sharedKey = false,
+    workers,
+    worker_ids = []
+  } = userState
   const { showBetaOption } = appStore
 
   const [processState, setProcessState] = useState('')
@@ -244,7 +253,7 @@ const SettingsPage = () => {
                 )}
                 {!router.query.panel &&
                   `
-                Stable Horde Settings
+                AI Horde Settings
                 `}
                 {router.query.panel === 'workers' && `Manage Workers`}
                 {router.query.panel === 'prefs' && `ArtBot Prefs`}
@@ -267,7 +276,7 @@ const SettingsPage = () => {
                     )
                   }}
                 >
-                  Stable Horde settings
+                  AI Horde settings
                 </DropDownMenuItem>
                 <DropDownMenuItem
                   onClick={() => {
@@ -309,7 +318,7 @@ const SettingsPage = () => {
           <ul className={styles['links-list']}>
             <li>
               <Linker href="/settings" passHref>
-                Stable Horde Settings
+                AI Horde Settings
               </Linker>
             </li>
             <li>
@@ -333,13 +342,93 @@ const SettingsPage = () => {
           {!router.query.panel ? (
             <>
               <Section>
-                <PageTitle as="h2">Stable Horde Settings</PageTitle>
+                <PageTitle as="h2">AI Horde Settings</PageTitle>
+              </Section>
+              {loggedIn && username && sharedKey && (
+                <Section>
+                  <div className="flex flex-col gap-[1px]">
+                    <div className="text-[16px]">Welcome back,</div>
+                    <div className="text-[24px] font-[700] mt-[-8px]">
+                      Shared key provided by {username}
+                    </div>
+                  </div>
+                  <div className={styles['user-info-wrapper']}>
+                    <div className={styles['user-info-wrapper-title']}>
+                      Available Kudos
+                    </div>
+                    <div className={styles['user-info-wrapper-details']}>
+                      {kudos.toLocaleString()}
+                    </div>
+                  </div>
+                </Section>
+              )}
+              {loggedIn && username && !sharedKey && (
+                <Section>
+                  <div className="flex flex-col gap-[1px]">
+                    <div className="text-[16px]">Welcome back,</div>
+                    <div className="text-[24px] font-[700] mt-[-8px]">
+                      {username}
+                    </div>
+                  </div>
+                  <div className={styles['user-info-wrapper']}>
+                    <div className={styles['user-info-wrapper-title']}>
+                      Currently Available Kudos
+                    </div>
+                    <div className={styles['user-info-wrapper-details']}>
+                      {kudos.toLocaleString()}
+                    </div>
+                  </div>
+                  <div className={styles['user-info-wrapper']}>
+                    <div className={styles['user-info-wrapper-title']}>
+                      Kudos gifted to you
+                    </div>
+                    <div className={styles['user-info-wrapper-details']}>
+                      {Math.abs(kudos_details.received).toLocaleString()}
+                    </div>
+                  </div>
+                  <div className={styles['user-info-wrapper']}>
+                    <div className={styles['user-info-wrapper-title']}>
+                      Kudos gifted to others
+                    </div>
+                    <div className={styles['user-info-wrapper-details']}>
+                      {Math.abs(kudos_details.gifted).toLocaleString()}
+                    </div>
+                  </div>
+                  <div className={styles['user-info-wrapper']}>
+                    <div className={styles['user-info-wrapper-title']}>
+                      Images you&apos;ve requested
+                    </div>
+                    <div className={styles['user-info-wrapper-details']}>
+                      {records.request.image.toLocaleString()}
+                    </div>
+                  </div>
+                  <div className={styles['user-info-wrapper']}>
+                    <div className={styles['user-info-wrapper-title']}>
+                      Images generated from your workers
+                    </div>
+                    <div className={styles['user-info-wrapper-details']}>
+                      {records.fulfillment.image.toLocaleString()}
+                    </div>
+                  </div>
+                  <div className={styles['user-info-wrapper']}>
+                    <div className={styles['user-info-wrapper-title']}>
+                      Your Workers
+                    </div>
+                    <div className={styles['user-info-wrapper-details']}>
+                      {worker_ids === null
+                        ? 0
+                        : worker_ids.length.toLocaleString()}
+                    </div>
+                  </div>
+                </Section>
+              )}
+              <Section>
                 <SubSectionTitle>
                   <TextTooltipRow>
                     <strong>API key</strong>
                     <Tooltip tooltipId="api-key-tooltip">
                       Leave blank for anonymous access. An API key gives higher
-                      priority access to the Stable Horde distributed cluster,
+                      priority access to the AI Horde distributed cluster,
                       resulting in shorter image creation times.
                     </Tooltip>
                   </TextTooltipRow>
@@ -366,17 +455,10 @@ const SettingsPage = () => {
                     </div>
                   )}
                 </SubSectionTitle>
-                <MaxWidth width="480px">
-                  {userStore.loggedIn && (
-                    <div className="block w-full mt-1 mb-2 text-xs">
-                      Logged in as {userStore.username}
-                      <br />
-                      Kudos:{' '}
-                      <span className="text-blue-500">
-                        {userStore.kudos?.toLocaleString()}
-                      </span>
-                    </div>
-                  )}
+                <MaxWidth
+                  // @ts-ignore
+                  width="480px"
+                >
                   <div className="flex flex-row gap-2">
                     <Input
                       type={componentState.showApiKey ? 'text' : 'password'}
@@ -458,7 +540,10 @@ const SettingsPage = () => {
                     NSFW filter will be blacked out.
                   </div>
                 </SubSectionTitle>
-                <MaxWidth width="240px">
+                <MaxWidth
+                  // @ts-ignore
+                  width="240px"
+                >
                   <Switch
                     onChange={() => {
                       if (componentState.allowNsfwImages) {
@@ -480,7 +565,10 @@ const SettingsPage = () => {
                     potentially slower.
                   </div>
                 </SubSectionTitle>
-                <MaxWidth width="240px">
+                <MaxWidth
+                  // @ts-ignore
+                  width="240px"
+                >
                   <Select
                     isSearchable={false}
                     onChange={(obj: any) =>
@@ -506,7 +594,10 @@ const SettingsPage = () => {
                     this incurs an extra kudos cost.
                   </div>
                 </SubSectionTitle>
-                <MaxWidth width="240px">
+                <MaxWidth
+                  // @ts-ignore
+                  width="240px"
+                >
                   <Switch
                     onChange={() => {
                       if (componentState.slow_workers) {
@@ -531,7 +622,10 @@ const SettingsPage = () => {
                     </Linker>
                   </div>
                 </SubSectionTitle>
-                <MaxWidth width="480px">
+                <MaxWidth
+                  // @ts-ignore
+                  width="480px"
+                >
                   <Input
                     type="text"
                     name="steps"
@@ -564,7 +658,10 @@ const SettingsPage = () => {
                       break.
                     </div>
                   </SubSectionTitle>
-                  <MaxWidth width="240px">
+                  <MaxWidth
+                    // @ts-ignore
+                    width="240px"
+                  >
                     <Select
                       options={[
                         { value: true, label: 'Yes' },
@@ -721,7 +818,10 @@ const SettingsPage = () => {
                     ArtBot
                   </div>
                 </SubSectionTitle>
-                <MaxWidth width="240px">
+                <MaxWidth
+                  // @ts-ignore
+                  width="240px"
+                >
                   <Select
                     isSearchable={false}
                     onChange={(obj: any) => {
@@ -770,7 +870,10 @@ const SettingsPage = () => {
                     <Linker href="/images">images gallery page</Linker>.
                   </div>
                 </SubSectionTitle>
-                <MaxWidth width="240px">
+                <MaxWidth
+                  // @ts-ignore
+                  width="240px"
+                >
                   <Switch
                     onChange={() => {
                       if (componentState.enableGallerySwipe) {
@@ -792,7 +895,10 @@ const SettingsPage = () => {
                     receives a new image from the AI Horde backend.
                   </div>
                 </SubSectionTitle>
-                <MaxWidth width="240px">
+                <MaxWidth
+                  // @ts-ignore
+                  width="240px"
+                >
                   <Switch
                     onChange={() => {
                       handleSwitchSelect(
@@ -826,7 +932,10 @@ const SettingsPage = () => {
                     </div>
                   )}
                 </SubSectionTitle>
-                <MaxWidth width="240px">
+                <MaxWidth
+                  // @ts-ignore
+                  width="240px"
+                >
                   <Button
                     onClick={() => {
                       // @ts-ignore
@@ -850,7 +959,10 @@ const SettingsPage = () => {
                     additional logs.
                   </div>
                 </SubSectionTitle>
-                <MaxWidth width="240px">
+                <MaxWidth
+                  // @ts-ignore
+                  width="240px"
+                >
                   <Button
                     onClick={() => {
                       //@ts-ignore
@@ -879,7 +991,10 @@ const SettingsPage = () => {
                     reset.
                   </div>
                 </SubSectionTitle>
-                <MaxWidth width="240px">
+                <MaxWidth
+                  // @ts-ignore
+                  width="240px"
+                >
                   <Button
                     theme="secondary"
                     onClick={() =>
@@ -905,7 +1020,10 @@ const SettingsPage = () => {
                     reset.
                   </div>
                 </SubSectionTitle>
-                <MaxWidth width="240px">
+                <MaxWidth
+                  // @ts-ignore
+                  width="240px"
+                >
                   <Button
                     theme="secondary"
                     onClick={() => {
@@ -932,7 +1050,10 @@ const SettingsPage = () => {
                     still be available after this reset.
                   </div>
                 </SubSectionTitle>
-                <MaxWidth width="240px">
+                <MaxWidth
+                  // @ts-ignore
+                  width="240px"
+                >
                   <Button
                     theme="secondary"
                     onClick={async () => {
@@ -956,6 +1077,7 @@ const SettingsPage = () => {
                   </div>
                 </SubSectionTitle>
                 <MaxWidth
+                  // @ts-ignore
                   width="240px"
                 >
                   <Select

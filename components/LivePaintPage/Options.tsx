@@ -161,7 +161,10 @@ export const LivePaintOptions = ({ input, setInput }: any) => {
               </Tooltip>
             </TextTooltipRow>
           </SubSectionTitle>
-          <MaxWidth width="240px">
+          <MaxWidth
+            // @ts-ignore
+            width="240px"
+          >
             <div className="flex flex-row gap-2">
               <Input
                 // @ts-ignore

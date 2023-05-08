@@ -49,7 +49,10 @@ const Samplers = ({
               used.
             </div>
           ) : (
-            <MaxWidth width="240px">
+            <MaxWidth
+              // @ts-ignore
+              width="240px"
+            >
               <SelectComponent
                 options={samplerOptions(input)}
                 onChange={(obj: { value: string; label: string }) => {

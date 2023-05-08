@@ -1,21 +1,14 @@
-import React, { CSSProperties } from 'react'
+import React, { CSSProperties, useId } from 'react'
 import Select, { OptionProps } from 'react-select'
-import { useUID } from 'react-uid'
+// import { useUID } from 'react-uid
 
-import { zIndex } from '../../appConstants'
-
-import { SelectPropsComponent } from '../../types'
-import './styles.css'
-import { useMounted } from '../../hooks/useMounted'
+import { zIndex } from '_constants'
+import { SelectPropsComponent } from 'types'
 
 const SelectComponent = (props: SelectPropsComponent) => {
   // Fixes a bunch of weird SSR related issues with react-select
   // See: https://github.com/JedWatson/react-select/issues/3590
-  const uid = useUID()
-  const { hasMounted } = useMounted()
-  if (!hasMounted) {
-    return null
-  }
+  const id = useId()
 
   const { ...rest } = props
 
@@ -70,8 +63,8 @@ const SelectComponent = (props: SelectPropsComponent) => {
 
   return (
     <Select
-      id={uid}
-      instanceId={uid}
+      id={id}
+      instanceId={id}
       classNamePrefix="select"
       closeMenuOnSelect={props.isMulti ? false : true}
       {...rest}

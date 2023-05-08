@@ -43,7 +43,10 @@ const SelectModel = ({ input, setInput, modelerOptions }: IProps) => {
           </Tooltip>
         </TextTooltipRow>
       </SubSectionTitle>
-      <MaxWidth width="480px">
+      <MaxWidth
+        // @ts-ignore
+        width="480px"
+      >
         <SelectComponent
           menuPlacement={'top'}
           //@ts-ignore
@@ -102,7 +105,11 @@ const SelectModel = ({ input, setInput, modelerOptions }: IProps) => {
         </div>
       )}
       {modelDetails[input.models[0]]?.showcases && (
-        <MaxWidth width="240" className="mt-2">
+        <MaxWidth
+          // @ts-ignore
+          width="240px"
+          className="mt-2"
+        >
           <div className="mb-2 text-sm">
             Example output using {input.models[0]}
           </div>
@@ -115,7 +122,10 @@ const SelectModel = ({ input, setInput, modelerOptions }: IProps) => {
           />
         </MaxWidth>
       )}
-      <MaxWidth width="480px">
+      <MaxWidth
+        // @ts-ignore
+        width="480px"
+      >
         {modelDetails[input.models[0]] && (
           <div className="mt-2 text-xs">
             {modelDetails[input.models[0]].description &&

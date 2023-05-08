@@ -21,45 +21,40 @@ const PromptText = ({ input, setInput }: any) => {
           />
         </InteractiveModal>
       )}
-      <BasePromptTextArea
-        handleChangeValue={(e) => {
-          setInput({ prompt: e.target.value })
-        }}
-        handleClear={() => {
-          PromptInputSettings.set('prompt', '')
-          setInput({
-            prompt: ''
-          })
-        }}
-        label={
-          <>
-            <IconPlaylistAdd />
-            Prompt
-          </>
-        }
-        placeholder="Describe your image"
-        optionalButton={
-          <>
-            <Tooltip
-              disabled={isMobile()}
-              targetId="view-prompt-library-tooltip"
-            >
-              View prompt history.
-            </Tooltip>
-            <Button
-              id="view-prompt-library-tooltip"
-              title="Show prompt history"
-              onClick={() => {
-                setShowPromptHistory(true)
-              }}
-              size="small"
-            >
-              <IconBook stroke={1.5} />
-            </Button>
-          </>
-        }
-        value={input.prompt}
-      />
+      <div className="flex flex-row items-center gap-2 mt-0 mb-1 text-sm font-bold">
+        <PlaylistXIcon hideCross />
+        Prompt
+      </div>
+      <FlexRow>
+        <TextArea
+          name="prompt"
+          placeholder="Describe your image..."
+          onChange={handleChangeValue}
+          value={input.prompt}
+        />
+        <div className="flex flex-col gap-2">
+          <Button
+            title="Clear current input"
+            theme="secondary"
+            onClick={() => {
+              PromptInputSettings.set('prompt', '')
+              setInput({
+                prompt: ''
+              })
+            }}
+          >
+            <ArrowBarLeftIcon />
+          </Button>
+          <Button
+            title="Show prompt history"
+            onClick={() => {
+              setShowPromptHistory(true)
+            }}
+          >
+            <BookIcon />
+          </Button>
+        </div>
+      </FlexRow>
     </>
   )
 }
