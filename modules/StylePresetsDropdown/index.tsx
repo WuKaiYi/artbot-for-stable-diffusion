@@ -5,6 +5,7 @@ import { GetSetPromptInput } from 'types'
 import styles from './component.module.css'
 import Overlay from 'components/UI/Overlay'
 import { stylePresets } from 'models/StylePresets'
+import clsx from 'clsx'
 
 const StylePresetsDropdown = ({ input, setInput }: GetSetPromptInput) => {
   const [showMenu, setShowMenu] = useState(false)
@@ -19,7 +20,7 @@ const StylePresetsDropdown = ({ input, setInput }: GetSetPromptInput) => {
 
     const updateInput = {
       prompt: positive,
-      negative,
+      negative: negative.trim(),
       models: stylePresets[key].model
         ? [stylePresets[key].model]
         : input.models,
@@ -46,12 +47,17 @@ const StylePresetsDropdown = ({ input, setInput }: GetSetPromptInput) => {
   const renderStyleList = () => {
     const arr = []
 
-    const p = input.prompt ? input.prompt : '[no prompt set]'
+    const p = input.prompt ? input.prompt : '[no prompt set] '
     const np = input.negative ? input.negative : ''
 
     for (const [key, presetDetails] of Object.entries(stylePresets)) {
       let modify = presetDetails.prompt.replace('{p}', p)
-      modify = modify.replace('{np}', np)
+
+      if (!modify.includes('###') && np) {
+        modify = modify.replace('{np}', ' ### ' + np)
+      } else {
+        modify = modify.replace('{np}', np)
+      }
 
       arr.push(
         <div className={styles['preset-wrapper']} key={`style_${key}`}>
@@ -94,7 +100,12 @@ const StylePresetsDropdown = ({ input, setInput }: GetSetPromptInput) => {
       {showMenu && (
         <>
           <Overlay handleClose={() => setShowMenu(false)} disableBackground />
-          <div className={styles['dropdown-menu']}>
+          <div
+            className={clsx(
+              styles['dropdown-menu'],
+              'text-black dark:text-white'
+            )}
+          >
             <div
               className={styles['StyledClose']}
               onClick={() => setShowMenu(false)}

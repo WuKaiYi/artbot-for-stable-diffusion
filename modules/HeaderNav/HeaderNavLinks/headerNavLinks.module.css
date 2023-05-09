@@ -198,13 +198,60 @@
 .NavigationMenuViewport[data-state='closed'] {
   animation: scaleOut 200ms ease;
 }
+
 @media only screen and (min-width: 600px) {
   .NavigationMenuViewport {
-    width: var(--radix-navigation-menu-viewport-width);
+    width: 400px;
   }
 }
 
-.ViewportPosition {
+<<<<<<<
+  HEAD:modules/headernav/headernavlinks/headernavlinks.module.css
+  =======
+  .List {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  margin: 0;
+  column-gap: 10px;
+  list-style: none;
+}
+
+.ListItemLink {
+  display: block;
+  outline: none;
+  text-decoration: none;
+  user-select: none;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 15px;
+  line-height: 1;
+}
+
+.ListItemLink:hover {
+  background-color: #f2f2f2;
+}
+
+@media (prefers-color-scheme: dark) {
+  .ListItemLink:hover {
+    background-color: #222222;
+  }
+}
+
+.ListItemHeading {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 5px;
+}
+
+.ListItemText {
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: initial;
+}
+
+>>>>>>>main:components/ui/header/navbar.module.css .ViewportPosition {
   position: absolute;
   display: flex;
   justify-content: flex-end;

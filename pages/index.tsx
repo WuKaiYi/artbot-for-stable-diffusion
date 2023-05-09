@@ -1,4 +1,4 @@
-import { useState } from 'react'
+// import { useState } from 'react'
 // import ModalComponent from '../../components/Modal'
 
 import { usePromptInput } from 'hooks/usePromptInput'
@@ -11,7 +11,7 @@ const HomePage = () => {
   const [input, setInput] = usePromptInput()
 
   // Modal test
-  const [showModal, setShowModal] = useState(true)
+  // const [showModal, setShowModal] = useState(true)
 
   return (
     <div className="flex flex-col w-full gap-0">

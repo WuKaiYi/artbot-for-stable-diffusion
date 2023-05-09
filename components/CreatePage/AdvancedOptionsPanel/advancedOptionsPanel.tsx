@@ -28,7 +28,6 @@ import HiresFix from './HiresFix'
 import InputSwitch from './InputSwitch'
 import NumericInputSlider from './NumericInputSlider'
 import Samplers from './Samplers'
-import SelectModel from './SelectModel'
 import UpscalerOptions from './UpscalerOptions'
 
 // Store imports
@@ -46,11 +45,9 @@ import { trackEvent } from 'api/telemetry'
 import { MAX_IMAGES_PER_JOB } from '_constants'
 import RenderParentImage from 'components/ParentImage'
 import ImageOrientationOptions from 'modules/ImageOrientationOptions'
-
-const NoSliderSpacer = styled.div`
-  height: 14px;
-  margin-bottom: 16px;
-`
+import { Button } from 'components/UI/Button'
+import GrainIcon from 'components/icons/GrainIcon'
+import ArrowBarLeftIcon from 'components/icons/ArrowBarLeftIcon'
 
 interface Props {
   input: any
@@ -492,7 +489,7 @@ const AdvancedOptionsPanel = ({ input, setInput }: Props) => {
           </div>
         </MaxWidth>
       </Section>
-      {input.source_processing !== SourceProcessing.OutPainting &&
+      {/* {input.source_processing !== SourceProcessing.OutPainting &&
         !input.useAllModels &&
         !componentState.showMultiModel &&
         !input.useFavoriteModels && (
