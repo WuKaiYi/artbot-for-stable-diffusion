@@ -14,6 +14,8 @@ const ImageV2 = ({ className, image, isHero = false, style }: any) => {
 
   if (isHero && image.imageBlob) {
     imageSrc = objectURL.createObjectURL(image.imageBlob)
+  } else if (isHero && image.base64String) {
+    imageSrc = 'data:image/webp;base64,' + image.base64String
   } else if (image && image.thumbnail instanceof Blob) {
     imageSrc = objectURL.createObjectURL(image.thumbnail)
   } else {
