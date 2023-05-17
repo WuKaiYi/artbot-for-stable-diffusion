@@ -21,6 +21,9 @@ const ImagePage = () => {
   const [relatedImages, setRelatedImages] = useState([])
   const [imageModalOpen, setImageModalOpen] = useState(false)
 
+  const hasMainImage = imageDetails.base64String || imageDetails.imageBlob
+  const noImageFound = !isInitialLoad && !hasMainImage
+
   const currentIndex = relatedImages.findIndex((el) => {
     return el.jobId === id
   })
@@ -35,10 +38,10 @@ const ImagePage = () => {
     setIsInitialLoad(false)
     setImageDetails(data)
 
-    if (data?.base64String) {
+    if (hasMainImage) {
       findRelatedImages(data.parentJobId)
     }
-  }, [findRelatedImages, id])
+  }, [findRelatedImages, hasMainImage, id])
 
   // const afterDeleteImageClick = async () => {
   //   router.push(`/images`)
@@ -118,8 +121,6 @@ const ImagePage = () => {
     return () => window.removeEventListener('keydown', handleKeyPress)
   }, [handleKeyPress])
 
-  const noImageFound = !isInitialLoad && !imageDetails?.base64String
-
   return (
     <div className="pb-[88px]">
       <Head>
@@ -159,7 +160,7 @@ const ImagePage = () => {
         </>
       )}
 
-      {!isInitialLoad && imageDetails?.base64String && (
+      {!isInitialLoad && hasMainImage && (
         <>
           <ImageDetails
             handleReloadImageData={handleReloadImageData}
