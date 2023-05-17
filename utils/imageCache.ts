@@ -406,7 +406,7 @@ export const addCompletedJobToDb = async ({
   thumbnail
 }: {
   jobDetails: any
-  thumbnail: Blob
+  thumbnail?: any
   errorCount?: number
 }) => {
   // Catch a potential race condition where the same jobId can be added twice.

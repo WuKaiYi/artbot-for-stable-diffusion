@@ -1,10 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import clsx from 'clsx'
-import LazyLoad from 'react-lazyload'
 
 interface ImageDetails {
   base64String: string
-  thumbnail?: string
+  thumbnail: string
   prompt?: string
 }
 
@@ -45,29 +44,27 @@ export default function ImageSquare({
   const classes = ['overflow-hidden', 'relative']
 
   return (
-    <LazyLoad once>
-      <div
-        className={clsx(classes)}
+    <div
+      className={clsx(classes)}
+      style={{
+        width: `${size}px`,
+        height: `${size}px`,
+        position: 'relative'
+      }}
+    >
+      <img
+        // fill
+        id={id}
+        src={imageSrc}
+        alt={imageDetails?.prompt || ''}
+        loading="lazy"
+        className="mx-auto rounded"
         style={{
+          objectFit: 'cover',
           width: `${size}px`,
-          height: `${size}px`,
-          position: 'relative'
+          height: `${size}px`
         }}
-      >
-        <img
-          // fill
-          id={id}
-          src={imageSrc}
-          alt={imageDetails?.prompt || ''}
-          loading="lazy"
-          className="mx-auto rounded"
-          style={{
-            objectFit: 'cover',
-            width: `${size}px`,
-            height: `${size}px`
-          }}
-        />
-      </div>
-    </LazyLoad>
+      />
+    </div>
   )
 }

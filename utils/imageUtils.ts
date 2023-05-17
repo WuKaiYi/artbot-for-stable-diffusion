@@ -864,7 +864,8 @@ export const generateBase64Thumbnail = async (
       file = new File([imageBlob], 'image.webp')
     }
   } catch (err) {
-    console.log(`dataUrlToFile`, dataUrlToFile)
+    console.log(`Unable to generate file object from imageBlob`)
+    console.log(err)
     return {
       success: false
     }
@@ -881,8 +882,8 @@ export const generateBase64Thumbnail = async (
       quality
     })
   } catch (err) {
-    console.log(`readAndCompressImage`, err)
-    console.log(`imageBlob?`, imageBlob)
+    console.log(`Unable to readAndCompressImage`)
+    console.log(err)
     return {
       success: false
     }

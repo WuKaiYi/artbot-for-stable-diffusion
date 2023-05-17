@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 
 import React from 'react'
-import LazyLoad from 'react-lazyload'
 
 const ImageV2 = ({ className, image, isHero = false, style }: any) => {
   if (typeof window === 'undefined') {
@@ -24,21 +23,19 @@ const ImageV2 = ({ className, image, isHero = false, style }: any) => {
   }
 
   return (
-    <LazyLoad once>
-      <img
-        id={'image_' + image.id}
-        className={className}
-        src={imageSrc}
-        loading="lazy"
-        style={{
-          ...style,
-          borderRadius: '4px',
-          width: '100%',
-          display: 'block'
-        }}
-        alt={image.prompt}
-      />
-    </LazyLoad>
+    <img
+      id={'image_' + image.id}
+      className={className}
+      src={imageSrc}
+      loading="lazy"
+      style={{
+        ...style,
+        borderRadius: '4px',
+        width: '100%',
+        display: 'block'
+      }}
+      alt={image.prompt}
+    />
   )
 }
 

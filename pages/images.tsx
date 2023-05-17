@@ -48,6 +48,7 @@ import { useImagePreview } from 'modules/ImagePreviewProvider'
 import Tooltip from 'components/Tooltip'
 import isMobile from 'is-mobile'
 import ImageV2 from 'components/ImageV2'
+import LazyLoad from 'react-lazyload'
 
 const MenuSeparator = styled.div`
   width: 100%;
@@ -983,7 +984,9 @@ const ImagesPage = () => {
                             </div>
                           </Tooltip>
                         )}
-                        <ImageV2 image={image} />
+                        <LazyLoad once>
+                          <ImageV2 image={image} />
+                        </LazyLoad>
                         {componentState.deleteMode &&
                           componentState.deleteSelection.indexOf(image.id) >=
                             0 && <ImageOverlay></ImageOverlay>}
@@ -1050,11 +1053,13 @@ const ImagesPage = () => {
                             </div>
                           </Tooltip>
                         )}
-                        <ImageSquare
-                          id={'image_' + image.id}
-                          imageDetails={image}
-                          imageType={'image/webp'}
-                        />
+                        <LazyLoad once>
+                          <ImageSquare
+                            id={'image_' + image.id}
+                            imageDetails={image}
+                            imageType={'image/webp'}
+                          />
+                        </LazyLoad>
                         {componentState.deleteMode &&
                           componentState.deleteSelection.indexOf(image.id) >=
                             0 && <ImageOverlay></ImageOverlay>}

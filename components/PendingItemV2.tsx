@@ -122,8 +122,6 @@ const ImageContainer = styled.div`
   cursor: pointer;
 `
 
-const StyledImage = styled(ImageSquare)``
-
 interface IProps {
   handleCloseClick?: (jobId: string) => void
   jobDetails: any
@@ -261,9 +259,10 @@ const PendingItem = memo(
               ) : null}
               {jobDetails.jobStatus === JobStatus.Done && (
                 <ImageContainer onClick={() => onImageClick(jobId)}>
-                  <StyledImage
-                    // @ts-ignore
+                  <ImageSquare
+                    id={'image_' + jobDetails.id}
                     imageDetails={jobDetails}
+                    imageType={'image/webp'}
                     size={100}
                   />
                 </ImageContainer>

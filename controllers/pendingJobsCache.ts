@@ -99,7 +99,6 @@ export const getAllPendingJobs = (status?: any): Array<any> => {
 }
 
 export const setPendingJob = (pendingJob: IPendingJob) => {
-  console.log(`setting new pending job!`, pendingJob)
   if (!pendingJob || !pendingJob.jobId) {
     return
   }
