@@ -19,6 +19,7 @@ import MenuButton from '../../UI/MenuButton'
 import PageTitle from '../../UI/PageTitle'
 import TextButton from '../../UI/TextButton'
 import useRelatedImageModal from './useRelatedImageModal'
+import ImageV2 from 'components/ImageV2'
 
 const NonLink = styled.div`
   cursor: pointer;
@@ -283,51 +284,42 @@ const RelatedImages = ({
               seed: number
             }) => {
               return (
-                <LazyLoad key={image.jobId} once>
-                  <div className="relative">
-                    <LinkEl
-                      href={`/image/${image.jobId}`}
-                      passHref
-                      onClick={(e) =>
-                        handleImageClick({
-                          e,
-                          id: image.id,
-                          jobId: image.jobId
-                        })
-                      }
-                    >
-                      <img
-                        src={
-                          'data:image/webp;base64,' +
-                          (image.thumbnail || image.base64String)
-                        }
-                        style={{
-                          borderRadius: '4px',
-                          width: '100%',
-                          display: 'block'
-                        }}
-                        alt={image.prompt}
-                      />
-                      {componentState.deleteMode &&
-                        componentState.deleteSelection.indexOf(image.id) >=
-                          0 && <ImageOverlay></ImageOverlay>}
-                      {componentState.deleteMode &&
-                        componentState.deleteSelection.indexOf(image.id) ===
-                          -1 && <SelectCheck />}
-                      {componentState.deleteMode &&
-                        componentState.deleteSelection.indexOf(image.id) >=
-                          0 && <SelectCheck fill="blue" stroke="white" />}
-                      {image.favorited && (
-                        <StyledHeartIcon
-                          fill="#14B8A6"
-                          width={2}
-                          size={32}
-                          shadow
-                        />
+                <div className="relative" key={image.jobId}>
+                  <LinkEl
+                    href={`/image/${image.jobId}`}
+                    passHref
+                    onClick={(e) =>
+                      handleImageClick({
+                        e,
+                        id: image.id,
+                        jobId: image.jobId
+                      })
+                    }
+                  >
+                    <LazyLoad once>
+                      <ImageV2 image={image} />
+                    </LazyLoad>
+                    {componentState.deleteMode &&
+                      componentState.deleteSelection.indexOf(image.id) >= 0 && (
+                        <ImageOverlay></ImageOverlay>
                       )}
-                    </LinkEl>
-                  </div>
-                </LazyLoad>
+                    {componentState.deleteMode &&
+                      componentState.deleteSelection.indexOf(image.id) ===
+                        -1 && <SelectCheck />}
+                    {componentState.deleteMode &&
+                      componentState.deleteSelection.indexOf(image.id) >= 0 && (
+                        <SelectCheck fill="blue" stroke="white" />
+                      )}
+                    {image.favorited && (
+                      <StyledHeartIcon
+                        fill="#14B8A6"
+                        width={2}
+                        size={32}
+                        shadow
+                      />
+                    )}
+                  </LinkEl>
+                </div>
               )
             }
           )}
@@ -339,7 +331,11 @@ const RelatedImages = ({
 
 function areEqual(prevProps: any, nextProps: any) {
   const imageIdEqual = prevProps.imageId === nextProps.imageId
-  const listEqual = prevProps.images === nextProps.images
+
+  const prevIds = prevProps.images.map((job: any) => job.jobId)
+  const nextIds = nextProps.images.map((job: any) => job.jobId)
+
+  const listEqual = JSON.stringify(prevIds) === JSON.stringify(nextIds)
 
   return imageIdEqual && listEqual
 }

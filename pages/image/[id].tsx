@@ -38,10 +38,10 @@ const ImagePage = () => {
     setIsInitialLoad(false)
     setImageDetails(data)
 
-    if (hasMainImage) {
+    if (data.parentJobId) {
       findRelatedImages(data.parentJobId)
     }
-  }, [findRelatedImages, hasMainImage, id])
+  }, [findRelatedImages, id])
 
   // const afterDeleteImageClick = async () => {
   //   router.push(`/images`)
@@ -177,9 +177,10 @@ const ImagePage = () => {
             imageId={imageDetails.jobId}
             parentJobId={imageDetails.parentJobId}
             images={relatedImages}
-            updateRelatedImages={() =>
+            updateRelatedImages={() => {
+              getRelatedImages.delete(imageDetails.parentJobId) // Bust related images cache
               findRelatedImages(imageDetails.parentJobId)
-            }
+            }}
           />
         </div>
       )}

@@ -1,12 +1,14 @@
 import memoize from 'memoizee'
 import { fetchRelatedImages } from '../../utils/db'
 
+const LIMIT = 50
+
 const _relatedImages = async (parentJobId: string) => {
   if (!parentJobId) {
     return []
   }
 
-  const foundImages = await fetchRelatedImages(parentJobId, 100)
+  const foundImages = await fetchRelatedImages(parentJobId, LIMIT)
   const sortedImages = foundImages.sort((a: any = {}, b: any = {}) => {
     if (a.id < b.id) {
       return 1
