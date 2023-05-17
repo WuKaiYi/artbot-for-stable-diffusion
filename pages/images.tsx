@@ -3,7 +3,6 @@ import Head from 'next/head'
 import React, { useCallback, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import LazyLoad from 'react-lazyload'
 import styled from 'styled-components'
 
 import PageTitle from '../components/UI/PageTitle'
@@ -183,7 +182,7 @@ const ImagesPage = () => {
     const sort = localStorage.getItem('imagePageSort') || 'new'
 
     if (componentState.filterMode === 'all') {
-      data = await fetchCompletedJobs({ offset, sort })
+      data = await fetchCompletedJobs({ offset, sort, limit: LIMIT })
     } else {
       data = await filterCompletedJobs({
         offset,
@@ -197,6 +196,7 @@ const ImagesPage = () => {
     await getImageCount()
     setComponentState({ images: data, isLoading: false })
   }, [
+    LIMIT,
     componentState.filterMode,
     componentState.updateTimestamp,
     getImageCount,
@@ -226,7 +226,11 @@ const ImagesPage = () => {
       if (btn === 'last') {
         const count = await countCompletedJobs()
         const sort = localStorage.getItem('imagePageSort') || 'new'
-        const data = await fetchCompletedJobs({ offset: count - LIMIT, sort })
+        const data = await fetchCompletedJobs({
+          offset: count - LIMIT,
+          sort,
+          limit: LIMIT
+        })
         setComponentState({
           images: data,
           isLoading: false,
@@ -244,7 +248,8 @@ const ImagesPage = () => {
         const sort = localStorage.getItem('imagePageSort') || 'new'
         const data = await fetchCompletedJobs({
           offset: 0,
-          sort
+          sort,
+          limit: LIMIT
         })
         setComponentState({
           images: data,

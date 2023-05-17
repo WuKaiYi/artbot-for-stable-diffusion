@@ -865,7 +865,9 @@ export const generateBase64Thumbnail = async (
     }
   } catch (err) {
     console.log(`dataUrlToFile`, dataUrlToFile)
-    return
+    return {
+      success: false
+    }
   }
 
   const { readAndCompressImage } = await import('browser-image-resizer')
@@ -880,7 +882,10 @@ export const generateBase64Thumbnail = async (
     })
   } catch (err) {
     console.log(`readAndCompressImage`, err)
-    return
+    console.log(`imageBlob?`, imageBlob)
+    return {
+      success: false
+    }
   }
 
   if (resizedImage) {

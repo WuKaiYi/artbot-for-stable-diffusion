@@ -12,18 +12,12 @@ import {
 import { getAllPendingJobs } from './pendingJobsCache'
 
 let MAX_JOBS = MAX_CONCURRENT_JOBS_ANON
-let pendingJobs: Array<any> = []
-
-export const getPendingJobsFromCache = () => {
-  return [...pendingJobs]
-}
 
 // Optimization hack?
 // Periodically fetch latest pending jobs from database
 // This call ensures it only happens one time (at a set interval)
 export const fetchPendingImageJobs = async () => {
-  const jobs = getAllPendingJobs()
-  pendingJobs = [...jobs]
+  return getAllPendingJobs()
 }
 
 const checkMultiPendingJobs = async () => {
@@ -35,17 +29,19 @@ const checkMultiPendingJobs = async () => {
     return
   }
 
-  const queued = pendingJobs.filter((job: { jobStatus: JobStatus }) => {
+  const queued = getAllPendingJobs().filter((job: { jobStatus: JobStatus }) => {
     if (job && job.jobStatus) {
       return job.jobStatus === JobStatus.Queued
     }
   })
 
-  const processing = pendingJobs.filter((job: { jobStatus: JobStatus }) => {
-    if (job && job.jobStatus) {
-      return job.jobStatus === JobStatus.Processing
+  const processing = getAllPendingJobs().filter(
+    (job: { jobStatus: JobStatus }) => {
+      if (job && job.jobStatus) {
+        return job.jobStatus === JobStatus.Processing
+      }
     }
-  })
+  )
 
   const processingOrQueued = [...processing, ...queued]
 
@@ -75,26 +71,30 @@ const createImageJobs = async () => {
     MAX_JOBS = MAX_CONCURRENT_JOBS_USER
   }
 
-  const queued = pendingJobs.filter((job: { jobStatus: JobStatus }) => {
+  const queued = getAllPendingJobs().filter((job: { jobStatus: JobStatus }) => {
     if (job && job.jobStatus) {
       return job.jobStatus === JobStatus.Queued
     }
   })
 
-  const processing = pendingJobs.filter((job: { jobStatus: JobStatus }) => {
-    if (job && job.jobStatus) {
-      return job.jobStatus === JobStatus.Processing
+  const processing = getAllPendingJobs().filter(
+    (job: { jobStatus: JobStatus }) => {
+      if (job && job.jobStatus) {
+        return job.jobStatus === JobStatus.Processing
+      }
     }
-  })
+  )
 
   const processingOrQueued = [...processing, ...queued]
 
   if (processingOrQueued.length < MAX_JOBS) {
-    const waitingJobs = pendingJobs.filter((job: { jobStatus: JobStatus }) => {
-      if (job && job.jobStatus) {
-        return job.jobStatus === JobStatus.Waiting
+    const waitingJobs = getAllPendingJobs().filter(
+      (job: { jobStatus: JobStatus }) => {
+        if (job && job.jobStatus) {
+          return job.jobStatus === JobStatus.Waiting
+        }
       }
-    })
+    )
 
     const [nextJobParams] = waitingJobs
 

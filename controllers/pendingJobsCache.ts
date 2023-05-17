@@ -45,6 +45,7 @@ export const initLoadPendingJobsFromDb = async () => {
 }
 
 export const syncPendingJobsFromDb = async () => {
+  console.log(`Syncing from DB!`)
   const jobs = await allPendingJobs()
 
   jobs.forEach((job: any) => {
@@ -72,8 +73,8 @@ export const deletePendingJobs = async (status?: any) => {
 }
 
 export const deletePendingJob = async (jobId: string) => {
+  await deletePendingJobFromDb(jobId)
   delete pendingJobs[jobId]
-  deletePendingJobFromDb(jobId)
 }
 
 export const getPendingJob = (jobId: string) => {
@@ -98,6 +99,7 @@ export const getAllPendingJobs = (status?: any): Array<any> => {
 }
 
 export const setPendingJob = (pendingJob: IPendingJob) => {
+  console.log(`setting new pending job!`, pendingJob)
   if (!pendingJob || !pendingJob.jobId) {
     return
   }

@@ -89,31 +89,6 @@ export const checkImageJob = async (jobId: string): Promise<CheckImage> => {
   }
 }
 
-export const createMultiImageJob = async () => {
-  if (typeof window === 'undefined') {
-    return
-  }
-
-  if (!isAppActive()) {
-    return
-  }
-
-  if (userInfoStore.state.loggedIn) {
-    MAX_JOBS = MAX_CONCURRENT_JOBS_USER
-  }
-
-  const queuedCount = (await getAllPendingJobs(JobStatus.Processing)) || []
-
-  if (queuedCount.length < MAX_JOBS) {
-    const pendingJobs = (await getAllPendingJobs(JobStatus.Waiting)) || []
-    const [nextJobParams] = pendingJobs
-
-    if (nextJobParams) {
-      await sendJobToApi(nextJobParams)
-    }
-  }
-}
-
 export const sendJobToApi = async (imageParams: CreateImageJob) => {
   if (!imageParams) {
     return

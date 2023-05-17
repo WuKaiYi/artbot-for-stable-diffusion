@@ -50,6 +50,7 @@ export const useFetchImage = (input: DefaultPromptInput) => {
   }, [getImage, jobDone, jobId])
 
   const newImageRequest = useCallback(async () => {
+    console.log(`where am I being called???`)
     if (!input.source_image || !input.prompt) {
       return
     }

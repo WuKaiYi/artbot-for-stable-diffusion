@@ -371,7 +371,7 @@ export const filterCompletedJobs = async ({
   }
 
   if (sort === 'old') {
-    return await db?.completed
+    const data = await db?.completed
       ?.orderBy('timestamp')
       .filter(function (entry: any) {
         return filterFunc(entry)
@@ -379,8 +379,14 @@ export const filterCompletedJobs = async ({
       .offset(offset)
       .limit(limit)
       .toArray()
+
+    return data.map((obj) => {
+      delete obj.imageBlob
+
+      return obj
+    })
   } else {
-    return await db?.completed
+    const data = await db?.completed
       ?.orderBy('timestamp')
       .filter(function (entry: any) {
         return filterFunc(entry)
@@ -389,11 +395,17 @@ export const filterCompletedJobs = async ({
       .offset(offset)
       .limit(limit)
       .toArray()
+
+    return data.map((obj) => {
+      delete obj.imageBlob
+
+      return obj
+    })
   }
 }
 
 export const fetchCompletedJobs = async ({
-  limit = 100,
+  limit = 50,
   offset = 0,
   sort = 'new'
 } = {}) => {
