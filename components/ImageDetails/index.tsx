@@ -21,6 +21,7 @@ import { logError } from 'utils/appUtils'
 import { userInfoStore } from 'store/userStore'
 import AdContainer from 'components/AdContainer'
 import { useWindowSize } from 'hooks/useWindowSize'
+import ImageV2 from 'components/ImageV2'
 
 interface Props {
   imageDetails: IImageDetails
@@ -143,10 +144,10 @@ const ImageDetails = ({
             styles['img-container']
           }
         >
-          <img
+          <ImageV2
             className={clsx(styles.img)}
-            src={'data:image/webp;base64,' + imageDetails.base64String}
-            alt={imageDetails.prompt}
+            image={imageDetails}
+            isHero
             style={{ ...imgStyle }}
           />
         </div>

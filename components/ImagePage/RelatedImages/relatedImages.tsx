@@ -277,7 +277,7 @@ const RelatedImages = ({
               favorited: boolean
               jobId: string
               base64String: string
-              thumbnail: string
+              thumbnail: Blob
               prompt: string
               timestamp: number
               seed: number

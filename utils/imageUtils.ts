@@ -850,7 +850,7 @@ export const dataUrlToFile = (
 }
 
 export const generateBase64Thumbnail = async (
-  base64: string,
+  imageBlob: Blob | string = '',
   jobId: string,
   maxWidth: number = 320,
   maxHeight: number = 768,
@@ -860,7 +860,9 @@ export const generateBase64Thumbnail = async (
   let file: any
 
   try {
-    file = dataUrlToFile(base64, `${jobId}.webp`)
+    if (imageBlob) {
+      file = new File([imageBlob], 'image.webp')
+    }
   } catch (err) {
     console.log(`dataUrlToFile`, dataUrlToFile)
     return
@@ -869,6 +871,7 @@ export const generateBase64Thumbnail = async (
   const { readAndCompressImage } = await import('browser-image-resizer')
 
   let resizedImage: any
+
   try {
     resizedImage = await readAndCompressImage(file, {
       maxHeight,
@@ -889,7 +892,9 @@ export const generateBase64Thumbnail = async (
   }
 
   const [, imgBase64String] = fullDataString.split(';base64,')
-  return imgBase64String
+  const thumbBlob = await base64toBlob(imgBase64String, 'images/webp')
+
+  return thumbBlob
 }
 
 export const isBase64UrlImage = async (base64String: string) => {

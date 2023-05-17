@@ -11,7 +11,6 @@ import {
 import { CheckImage, CreateImageJob, JobStatus } from '../types'
 import {
   addCompletedJobToDexie,
-  db,
   deletePendingJobFromDb,
   getImageDetails,
   updateAllPendingJobs,
@@ -48,7 +47,7 @@ let MAX_JOBS = MAX_CONCURRENT_JOBS_ANON
 
 interface FinishedImage {
   success: boolean
-  base64String?: string
+  imageBlob?: string
   status?: string
   message?: string
 }
@@ -249,7 +248,7 @@ export const sendJobToApi = async (imageParams: CreateImageJob) => {
         imageParams.has_source_image = true
       }
 
-      delete imageParams.base64String
+      delete imageParams.imageBlob
       delete imageParams.source_image
       delete imageParams.canvasStore
       trackEvent({
@@ -305,7 +304,7 @@ export const sendJobToApi = async (imageParams: CreateImageJob) => {
       imageParams.has_source_mask = true
     }
 
-    delete imageParams.base64String
+    delete imageParams.imageBlob
     delete imageParams.source_image
     delete imageParams.source_mask
     delete imageParams.canvasStore
@@ -429,10 +428,10 @@ export const getImage = async (jobId: string) => {
 
 export const addCompletedJobToDb = async ({
   jobDetails,
-  thumbnail = ''
+  thumbnail
 }: {
   jobDetails: any
-  thumbnail: string
+  thumbnail: Blob
   errorCount?: number
 }) => {
   // Catch a potential race condition where the same jobId can be added twice.
@@ -660,7 +659,7 @@ export const checkCurrentJob = async (imageDetails: any) => {
     if (
       imageDetails &&
       imgDetailsFromApi?.success &&
-      imgDetailsFromApi?.base64String
+      imgDetailsFromApi?.imageBlob
     ) {
       imageDetails.done = true
       imageDetails.jobStatus = JobStatus.Done
@@ -673,7 +672,7 @@ export const checkCurrentJob = async (imageDetails: any) => {
 
       if (isAppActive() || appInfoStore.state.primaryWindow) {
         const thumbnail = await generateBase64Thumbnail(
-          imgDetailsFromApi.base64String,
+          imgDetailsFromApi.imageBlob,
           jobId
         )
 

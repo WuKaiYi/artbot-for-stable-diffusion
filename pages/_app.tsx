@@ -39,7 +39,9 @@ import ErrorComponent, { logErrorInComponent } from 'components/ErrorComponent'
 import ServerUpdateComponent from 'components/ServerUpdateComponent'
 import { useWindowSize } from 'hooks/useWindowSize'
 import { ImagePreviewProvider } from 'modules/ImagePreviewProvider'
+import { initMockData } from 'utils/mockData'
 
+initMockData()
 initBrowserTab()
 initAppSettings()
 initDb()

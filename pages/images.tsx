@@ -48,6 +48,7 @@ import useGalleryImageModal from 'components/ImagesPage/useGalleryImageModal'
 import { useImagePreview } from 'modules/ImagePreviewProvider'
 import Tooltip from 'components/Tooltip'
 import isMobile from 'is-mobile'
+import ImageV2 from 'components/ImageV2'
 
 const MenuSeparator = styled.div`
   width: 100%;
@@ -943,7 +944,7 @@ const ImagesPage = () => {
                   favorited: boolean
                   jobId: string
                   base64String: string
-                  thumbnail: string
+                  thumbnail: Blob
                   prompt: string
                   timestamp: number
                   seed: number
@@ -951,67 +952,52 @@ const ImagesPage = () => {
                   models: Array<string>
                 }) => {
                   return (
-                    <LazyLoad key={image.jobId} once>
-                      <div className="relative">
-                        <LinkEl
-                          href={`/image/${image.jobId}`}
-                          passHref
-                          onClick={(e) =>
-                            handleImageClick(e, image.id, image.jobId)
-                          }
-                          tabIndex={0}
-                        >
-                          {!isMobile() && (
-                            <Tooltip targetId={'image_' + image.id}>
-                              <div
-                                className="font-mono text-xs"
-                                style={{
-                                  overflowWrap: 'break-word',
-                                  wordBreak: 'break-word'
-                                }}
-                              >
-                                <div className="mb-2">{image.prompt}</div>
-                                {image.models &&
-                                  Array.isArray(image.models) && (
-                                    <div>Model: {image.models[0]}</div>
-                                  )}
-                                <div>Sampler: {image.sampler}</div>
-                              </div>
-                            </Tooltip>
-                          )}
-                          <img
-                            id={'image_' + image.id}
-                            src={
-                              'data:image/webp;base64,' +
-                              (image.thumbnail || image.base64String)
-                            }
-                            style={{
-                              borderRadius: '4px',
-                              width: '100%',
-                              display: 'block'
-                            }}
-                            alt={image.prompt}
+                    <div className="relative" key={image.jobId}>
+                      <LinkEl
+                        href={`/image/${image.jobId}`}
+                        passHref
+                        onClick={(e) =>
+                          handleImageClick(e, image.id, image.jobId)
+                        }
+                        tabIndex={0}
+                      >
+                        {!isMobile() && (
+                          <Tooltip targetId={'image_' + image.id}>
+                            <div
+                              className="font-mono text-xs"
+                              style={{
+                                overflowWrap: 'break-word',
+                                wordBreak: 'break-word'
+                              }}
+                            >
+                              <div className="mb-2">{image.prompt}</div>
+                              {image.models && Array.isArray(image.models) && (
+                                <div>Model: {image.models[0]}</div>
+                              )}
+                              <div>Sampler: {image.sampler}</div>
+                            </div>
+                          </Tooltip>
+                        )}
+                        <ImageV2 image={image} />
+                        {componentState.deleteMode &&
+                          componentState.deleteSelection.indexOf(image.id) >=
+                            0 && <ImageOverlay></ImageOverlay>}
+                        {componentState.deleteMode &&
+                          componentState.deleteSelection.indexOf(image.id) ===
+                            -1 && <SelectCheck />}
+                        {componentState.deleteMode &&
+                          componentState.deleteSelection.indexOf(image.id) >=
+                            0 && <SelectCheck fill="blue" stroke="white" />}
+                        {image.favorited && (
+                          <StyledHeartIcon
+                            fill="#14B8A6"
+                            width={1}
+                            size={32}
+                            shadow
                           />
-                          {componentState.deleteMode &&
-                            componentState.deleteSelection.indexOf(image.id) >=
-                              0 && <ImageOverlay></ImageOverlay>}
-                          {componentState.deleteMode &&
-                            componentState.deleteSelection.indexOf(image.id) ===
-                              -1 && <SelectCheck />}
-                          {componentState.deleteMode &&
-                            componentState.deleteSelection.indexOf(image.id) >=
-                              0 && <SelectCheck fill="blue" stroke="white" />}
-                          {image.favorited && (
-                            <StyledHeartIcon
-                              fill="#14B8A6"
-                              width={1}
-                              size={32}
-                              shadow
-                            />
-                          )}
-                        </LinkEl>
-                      </div>
-                    </LazyLoad>
+                        )}
+                      </LinkEl>
+                    </div>
                   )
                 }
               )}
@@ -1026,7 +1012,7 @@ const ImagesPage = () => {
                   id: string
                   jobId: string
                   base64String: string
-                  thumbnail: string
+                  thumbnail: Blob
                   prompt: string
                   timestamp: number
                   seed: number
@@ -1035,56 +1021,54 @@ const ImagesPage = () => {
                   models: Array<string>
                 }) => {
                   return (
-                    <LazyLoad key={image.jobId} once>
-                      <div className="relative">
-                        <LinkEl
-                          href={`/image/${image.jobId}`}
-                          passHref
-                          onClick={(e) =>
-                            handleImageClick(e, image.id, image.jobId)
-                          }
-                          tabIndex={0}
-                        >
-                          {!isMobile() && (
-                            <Tooltip targetId={'image_' + image.id}>
-                              <div
-                                className="font-mono text-xs"
-                                style={{
-                                  overflowWrap: 'break-word',
-                                  wordBreak: 'break-word'
-                                }}
-                              >
-                                <div className="mb-2">{image.prompt}</div>
-                                <div>Model: {image.models[0]}</div>
-                                <div>Sampler: {image.sampler}</div>
-                              </div>
-                            </Tooltip>
-                          )}
-                          <ImageSquare
-                            id={'image_' + image.id}
-                            imageDetails={image}
-                            imageType={'image/webp'}
+                    <div className="relative" key={image.jobId}>
+                      <LinkEl
+                        href={`/image/${image.jobId}`}
+                        passHref
+                        onClick={(e) =>
+                          handleImageClick(e, image.id, image.jobId)
+                        }
+                        tabIndex={0}
+                      >
+                        {!isMobile() && (
+                          <Tooltip targetId={'image_' + image.id}>
+                            <div
+                              className="font-mono text-xs"
+                              style={{
+                                overflowWrap: 'break-word',
+                                wordBreak: 'break-word'
+                              }}
+                            >
+                              <div className="mb-2">{image.prompt}</div>
+                              <div>Model: {image.models[0]}</div>
+                              <div>Sampler: {image.sampler}</div>
+                            </div>
+                          </Tooltip>
+                        )}
+                        <ImageSquare
+                          id={'image_' + image.id}
+                          imageDetails={image}
+                          imageType={'image/webp'}
+                        />
+                        {componentState.deleteMode &&
+                          componentState.deleteSelection.indexOf(image.id) >=
+                            0 && <ImageOverlay></ImageOverlay>}
+                        {componentState.deleteMode &&
+                          componentState.deleteSelection.indexOf(image.id) ===
+                            -1 && <SelectCheck />}
+                        {componentState.deleteMode &&
+                          componentState.deleteSelection.indexOf(image.id) >=
+                            0 && <SelectCheck fill="blue" stroke="white" />}
+                        {image.favorited && (
+                          <StyledHeartIcon
+                            fill="#14B8A6"
+                            width={1}
+                            size={32}
+                            shadow
                           />
-                          {componentState.deleteMode &&
-                            componentState.deleteSelection.indexOf(image.id) >=
-                              0 && <ImageOverlay></ImageOverlay>}
-                          {componentState.deleteMode &&
-                            componentState.deleteSelection.indexOf(image.id) ===
-                              -1 && <SelectCheck />}
-                          {componentState.deleteMode &&
-                            componentState.deleteSelection.indexOf(image.id) >=
-                              0 && <SelectCheck fill="blue" stroke="white" />}
-                          {image.favorited && (
-                            <StyledHeartIcon
-                              fill="#14B8A6"
-                              width={1}
-                              size={32}
-                              shadow
-                            />
-                          )}
-                        </LinkEl>
-                      </div>
-                    </LazyLoad>
+                        )}
+                      </LinkEl>
+                    </div>
                   )
                 }
               )}
@@ -1097,7 +1081,7 @@ const ImagesPage = () => {
             (image: {
               jobId: string
               base64String: string
-              thumbnail: string
+              thumbnail: Blob
               prompt: string
               timestamp: number
               seed: number

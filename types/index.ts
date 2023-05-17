@@ -64,7 +64,7 @@ export interface CreateImageJob {
   orientation?: string
   wait_time?: number
   queue_position?: number
-  base64String?: string
+  imageBlob?: Blob
   initWaitTime?: number
   canvasStore?: any
   tiling: boolean
@@ -98,7 +98,7 @@ export interface IImageDetails {
   seed: string
   steps: string
   denoising_strength: number
-  thumbnail: string
+  thumbnail: Blob
   source_image: string
   imageType: string
   cfg_scale: number
