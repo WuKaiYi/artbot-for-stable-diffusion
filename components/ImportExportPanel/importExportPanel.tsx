@@ -10,6 +10,8 @@ import MaxWidth from 'components/UI/MaxWidth'
 import { useState } from 'react'
 import SpinnerV2 from 'components/Spinner'
 import { IconChevronRight } from '@tabler/icons-react'
+import { getZipData } from 'utils/streamZip'
+import { Button } from 'components/UI/Button'
 
 const Section = styled.div`
   padding-top: 16px;
@@ -144,7 +146,8 @@ const ImportExportPanel = () => {
                     { value: 100, label: 100 },
                     { value: 250, label: 250 },
                     { value: 500, label: 500 },
-                    { value: 750, label: 750 }
+                    { value: 750, label: 750 },
+                    { value: 2500, label: 2500 }
                   ]}
                   onChange={(option: any) => {
                     setComponentState({ filesPerZip: option })
@@ -159,6 +162,9 @@ const ImportExportPanel = () => {
             <ul>{renderImageList()}</ul>
           </Section>
         </SubSectionTitle>
+      </Section>
+      <Section>
+        <Button onClick={getZipData}>DONT CLICK ME</Button>
       </Section>
     </div>
   )

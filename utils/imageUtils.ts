@@ -11,6 +11,8 @@ import AppSettings from '../models/AppSettings'
 import { DEFAULT_SAMPLER_ARRAY } from '../_constants'
 import { isiOS, isSafariBrowser } from './appUtils'
 import { fetchCompletedJobs } from './db'
+// import { DownloadStream } from 'dl-stream'
+import JSZip from 'jszip'
 
 interface CreateImageJob {
   base64String?: string
@@ -571,20 +573,27 @@ export const downloadImages = async ({
 
   initBlob()
 
-  const { downloadZip } = await import('client-zip')
+  const { saveAs } = (await import('file-saver')).default
+  // const JSZip = await import('jszip')
+  const zip = new JSZip()
+
+  // const { downloadZip } = await import('client-zip')
   const fileDetails: any = []
   const fileArray: any = []
 
   let currentIndex = offset
+
   for (const imageId in imageArray) {
+    console.log(`aa`)
     const image: any = imageArray[imageId]
 
-    if (!image.base64String) {
+    if (!image.base64String && !image.imageBlob) {
       continue
     }
 
     let fileType = AppSettings.get('imageDownloadFormat') || 'jpg'
     let filename = `image_${imageId}.${fileType}`
+    console.log(`bb`)
 
     if (image.prompt) {
       filename =
@@ -596,6 +605,7 @@ export const downloadImages = async ({
           .slice(0, 125) +
         `_${imageId}.${fileType}`
     }
+    console.log(`cc`)
 
     const imageData = {
       name: filename,
@@ -610,50 +620,71 @@ export const downloadImages = async ({
       cfg_scale: Number(image.cfg_scale),
       seed: image.seed
     }
+    console.log(`dd`)
 
     if (image.img2img || image.source_processing === SourceProcessing.Img2Img) {
       // @ts-ignore
       imageData.denoising_strength = image.denoising_strength
     }
+    console.log(`ee`)
 
     fileDetails.push(imageData)
     let newBlob
-    const input = await base64toBlob(image.base64String, `image/${fileType}`)
+    let input
+    console.log(`ff`)
+
+    if (image.imageBlob) {
+      input = image.imageBlob
+    } else if (image.base64String) {
+      input = await base64toBlob(image.base64String, `image/${fileType}`)
+    }
+    console.log(`gg`)
+
     try {
       if (image.imageMimeType !== `image/${fileType}`) {
         if (input) {
+          console.log(`hh`)
+
           if (fileType === 'png') {
             // @ts-ignore
+            console.log(`ii`)
             newBlob = await input?.toPNG()
           }
 
           if (fileType === 'jpg') {
             // @ts-ignore
+            console.log(`jj`)
             newBlob = await input?.toJPEG()
           }
 
           if (fileType === 'webp') {
             // @ts-ignore
+            console.log(`kk`)
             newBlob = await input?.toWebP()
           }
         }
       } else {
+        console.log(`ll`)
         newBlob = input
       }
-      fileArray.push({
-        name: filename,
-        lastModified: new Date(image.timestamp),
-        input: newBlob
-      })
+      console.log(`mm`)
+      zip.file(filename, newBlob)
+      // fileArray.push({
+      //   name: filename,
+      //   lastModified: new Date(image.timestamp),
+      //   input: newBlob
+      // })
     } catch (err) {
       console.log(`Error converting image to ${fileType}...`)
       console.log(image.jobId)
     }
 
+    console.log(`nn`)
     callback({
       currentIndex
     })
 
+    console.log(`oo`)
     currentIndex++
   }
 
@@ -674,12 +705,29 @@ export const downloadImages = async ({
   }
 
   callback({ done: true })
-  const blob = await downloadZip([jsonDetails, ...fileArray]).blob()
-  const link = document.createElement('a')
-  link.href = URL.createObjectURL(blob)
-  link.download = zipFilename
-  link.click()
-  link.remove()
+
+  // saveAs(zipBlob, zipFilename)
+
+  try {
+    const zipBlob = await zip.generateAsync({ type: 'blob' })
+    //   // const blob = downloadZip(new DownloadStream([jsonDetails, ...fileArray]))
+
+    //   console.log(`BLO`, blob)
+    //   console.log(typeof blob)
+    //   // const blob = await downloadZip([jsonDetails, ...fileArray]).blob()
+    //   console.log(`11`)
+    const link = document.createElement('a')
+    link.href = URL.createObjectURL(zipBlob)
+
+    //   console.log(`??`, link.href)
+
+    link.download = zipFilename
+    link.click()
+    link.remove()
+  } catch (err) {
+    console.log(`Error: Unable to download ZIP`)
+    console.log(err)
+  }
 }
 
 export const downloadFile = async (image: any) => {
